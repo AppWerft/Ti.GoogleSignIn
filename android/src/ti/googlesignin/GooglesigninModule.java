@@ -38,16 +38,13 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-import com.paypal.android.sdk.payments.PayPalAuthorization;
-import com.paypal.android.sdk.payments.PayPalFuturePaymentActivity;
-import com.paypal.android.sdk.payments.PaymentActivity;
-import com.paypal.android.sdk.payments.PaymentConfirmation;
-import com.paypal.android.sdk.payments.ProofOfPayment;
 
 @Kroll.module(name = "Googlesignin", id = "ti.googlesignin")
 public class GooglesigninModule extends KrollModule implements
@@ -105,6 +102,7 @@ public class GooglesigninModule extends KrollModule implements
 		googleApiClient = new GoogleApiClient.Builder(ctx).addApi(Drive.API)
 				.addScope(Drive.SCOPE_FILE).addConnectionCallbacks(this)
 				.addOnConnectionFailedListener(this).build();
+
 		final Intent signInIntent = Auth.GoogleSignInApi
 				.getSignInIntent(googleApiClient);
 		final TiActivitySupport activitySupport = (TiActivitySupport) TiApplication
@@ -131,6 +129,28 @@ public class GooglesigninModule extends KrollModule implements
 
 		public void onResult(Activity dummy, int requestCode, int resultCode,
 				Intent data) {
+			if (requestCode == RC_SIGN_IN) {
+				GoogleSignInResult result = Auth.GoogleSignInApi
+						.getSignInResultFromIntent(data);
+				KrollDict kd = new KrollDict();
+				if (result.isSuccess()) {
+					GoogleSignInAccount acct = result.getSignInAccount();
+					kd.put("fullName", acct.getDisplayName());
+					kd.put("email", acct.getEmail());
+					kd.put("photo", acct.getPhotoUrl().toString());
+					kd.put("displayName", acct.getDisplayName());
+					kd.put("familyName", acct.getFamilyName());
+					kd.put("givenName", acct.getGivenName());
+					kd.put("accountName", acct.getAccount().name);
+					kd.put("token", acct.getIdToken());
+					if (hasListeners("onsuccess"))
+						fireEvent("onsuccess", kd);
+				} else {
+					kd.put("error", result.toString());
+					if (hasListeners("onerror"))
+						fireEvent("onerror", kd);
+				}
+			}
 
 		}
 	}
