@@ -54,6 +54,8 @@ public class GooglesigninModule extends KrollModule implements
 	public static final String LCAT = "GSignin";
 	private static final boolean DBG = TiConfig.LOGD;
 	private static int RC_SIGN_IN = 34;
+	Context ctx;
+	String packageName;
 
 	// You can define constants with @Kroll.constant, for example:
 	// @Kroll.constant
@@ -61,7 +63,8 @@ public class GooglesigninModule extends KrollModule implements
 	// GoogleSignInOptions.DEFAULT_SIGN_IN;
 	public GooglesigninModule() {
 		super();
-
+		ctx = TiApplication.getInstance().getApplicationContext();
+		packageName = TiApplication.getAppCurrentActivity().getPackageName();
 	}
 
 	@Kroll.onAppCreate
@@ -87,21 +90,21 @@ public class GooglesigninModule extends KrollModule implements
 
 	@Kroll.method
 	public void init() {
-		Context ctx = TiApplication.getInstance().getApplicationContext();
-		String packageName = TiApplication.getAppCurrentActivity()
-				.getPackageName();
 		try {
 			GooglePlayService.importJSON(new JSONObject(loadJSONFromAsset()));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-
 		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
 				GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+
 		// https://developers.google.com/android/guides/api-client#manually_managed_connections
-		googleApiClient = new GoogleApiClient.Builder(ctx).addApi(Drive.API)
-				.addScope(Drive.SCOPE_FILE).addConnectionCallbacks(this)
-				.addOnConnectionFailedListener(this).build();
+		googleApiClient = new GoogleApiClient.Builder(ctx)
+				// Specify which Apis are requested by your app.
+				.addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+				.addConnectionCallbacks(this).useDefaultAccount()
+				.addOnConnectionFailedListener(this)//
+				.build();
 
 		final Intent signInIntent = Auth.GoogleSignInApi
 				.getSignInIntent(googleApiClient);
