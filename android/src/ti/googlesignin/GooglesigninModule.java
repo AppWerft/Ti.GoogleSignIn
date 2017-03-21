@@ -95,11 +95,12 @@ public class GooglesigninModule extends KrollModule implements
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+		GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(
+				GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+
 		googleApiClient = new GoogleApiClient.Builder(ctx)
-				.addApi(Auth.GOOGLE_SIGN_IN_API,
-						new GoogleSignInOptions.Builder(
-								GoogleSignInOptions.DEFAULT_SIGN_IN)
-								.requestEmail().build())
+				.addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
+
 				.addConnectionCallbacks(this).useDefaultAccount()
 				.addOnConnectionFailedListener(this)//
 				.build();
