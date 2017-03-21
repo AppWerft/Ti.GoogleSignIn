@@ -19,16 +19,27 @@ import org.appcelerator.kroll.common.Log;
 import org.appcelerator.kroll.common.TiConfig;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.support.v4.*;
 import android.support.v4.app.FragmentActivity;
+import android.app.Activity;
 import android.content.Context;
 
+import com.google.android.gms.drive.*;
+
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
+import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
 
 @Kroll.module(name = "Googlesignin", id = "ti.googlesignin")
-public class GooglesigninModule extends KrollModule {
-
+public class GooglesigninModule extends KrollModule implements
+		ConnectionCallbacks, OnConnectionFailedListener {
+	GoogleApiClient googleApiClient;
 	// Standard Debugging variables
 	public static final String LCAT = "GSignin";
 	private static final boolean DBG = TiConfig.LOGD;
@@ -49,6 +60,20 @@ public class GooglesigninModule extends KrollModule {
 		// created
 	}
 
+	@Override
+	public void onStart(Activity activity) {
+		Log.d(LCAT, "[MODULE LIFECYCLE EVENT] start");
+		googleApiClient.connect();
+		super.onStart(activity);
+	}
+
+	@Override
+	public void onStop(Activity activity) {
+		Log.d(LCAT, "[MODULE LIFECYCLE EVENT] stop");
+		googleApiClient.disconnect();
+		super.onStop(activity);
+	}
+
 	@Kroll.method
 	public void init() {
 		Context ctx = TiApplication.getInstance();
@@ -66,15 +91,13 @@ public class GooglesigninModule extends KrollModule {
 		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
 				GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
 
-		// Build a GoogleApiClient with access to GoogleSignIn.API and the
-		// options above.
-		GoogleApiClient googleApiClient = new GoogleApiClient.Builder(ctx)
-				.enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-				.addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
+		googleApiClient = new GoogleApiClient.Builder(ctx).addApi(Drive.API)
+				.addScope(Drive.SCOPE_FILE).addConnectionCallbacks(this)
+				.addOnConnectionFailedListener(this).build();
 
 	}
 
-	private static String loadJSONFromAsset() {
+	private String loadJSONFromAsset() {
 		String json = null;
 		try {
 			String url = resolveUrl(null, "google-services.json");
@@ -90,6 +113,24 @@ public class GooglesigninModule extends KrollModule {
 			return null;
 		}
 		return json;
+	}
+
+	@Override
+	public void onConnectionFailed(ConnectionResult arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onConnected(Bundle arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onConnectionSuspended(int arg0) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
