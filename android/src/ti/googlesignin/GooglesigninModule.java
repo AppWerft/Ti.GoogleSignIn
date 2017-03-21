@@ -93,18 +93,17 @@ public class GooglesigninModule extends KrollModule implements
 	public void init() {
 		// http://yasirameen.com/2016/05/sign-in-with-google/
 		try {
-			web_client_key = GooglePlayService.importJSON(new JSONObject(
-					loadJSONFromAsset()));
-
+			web_client_key = GoogleServices.getClientId(new JSONObject(
+					loadJSONFromAsset("google-services.json")));
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(
+		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
 				GoogleSignInOptions.DEFAULT_SIGN_IN)
 				.requestIdToken(web_client_key).requestEmail().build();
 
 		googleApiClient = new GoogleApiClient.Builder(ctx)
-				.addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
+				.addApi(Auth.GOOGLE_SIGN_IN_API, gso)
 
 				.addConnectionCallbacks(this).useDefaultAccount()
 				.addOnConnectionFailedListener(this)//
@@ -195,12 +194,12 @@ public class GooglesigninModule extends KrollModule implements
 	public void onConnectionSuspended(int result) {
 	}
 
-	private String loadJSONFromAsset() {
+	private String loadJSONFromAsset(String jsonfile) {
 		String jsonString = null;
 		try {
 			InputStream inStream = TiFileFactory.createTitaniumFile(
-					new String[] { resolveUrl(null, "google-services.json") },
-					false).getInputStream();
+					new String[] { resolveUrl(null, jsonfile) }, false)
+					.getInputStream();
 			byte[] buffer = new byte[inStream.available()];
 			inStream.read(buffer);
 			inStream.close();
