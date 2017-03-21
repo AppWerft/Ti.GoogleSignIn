@@ -8,58 +8,88 @@
  */
 package ti.googlesignin;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
-
 import org.appcelerator.titanium.TiApplication;
+import org.appcelerator.titanium.io.TiFileFactory;
 import org.appcelerator.kroll.common.Log;
 import org.appcelerator.kroll.common.TiConfig;
+import org.json.JSONException;
+import org.json.JSONObject;
+import android.support.v4.*;
 
+import android.content.Context;
 
-@Kroll.module(name="Googlesignin", id="ti.googlesignin")
-public class GooglesigninModule extends KrollModule
-{
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+@Kroll.module(name = "Googlesignin", id = "ti.googlesignin")
+public class GooglesigninModule extends KrollModule {
 
 	// Standard Debugging variables
-	private static final String LCAT = "GooglesigninModule";
+	public static final String LCAT = "GSignin";
 	private static final boolean DBG = TiConfig.LOGD;
 
 	// You can define constants with @Kroll.constant, for example:
-	// @Kroll.constant public static final String EXTERNAL_NAME = value;
-
-	public GooglesigninModule()
-	{
+	// @Kroll.constant
+	// public static final int DEFAULT_SIGN_IN =
+	// GoogleSignInOptions.DEFAULT_SIGN_IN;
+	public GooglesigninModule() {
 		super();
+
 	}
 
 	@Kroll.onAppCreate
-	public static void onAppCreate(TiApplication app)
-	{
+	public static void onAppCreate(TiApplication app) {
 		Log.d(LCAT, "inside onAppCreate");
-		// put module init code that needs to run when the application is created
+		// put module init code that needs to run when the application is
+		// created
 	}
 
-	// Methods
 	@Kroll.method
-	public String example()
-	{
-		Log.d(LCAT, "example called");
-		return "hello world";
+	public void init() {
+		Context ctx = TiApplication.getInstance();
+		String packageName = TiApplication.getAppCurrentActivity()
+				.getPackageName();
+		try {
+			GooglePlayService.importJSON(new JSONObject(loadJSONFromAsset()));
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
+		// Configure sign-in to request the user's ID, email address, and basic
+		// profile. ID and
+		// basic profile are included in DEFAULT_SIGN_IN.
+		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
+				GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+
+		// Build a GoogleApiClient with access to GoogleSignIn.API and the
+		// options above.
+		GoogleApiClient googleApiClient = new GoogleApiClient.Builder(ctx)
+				.enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+				.addApi(Auth.GOOGLE_SIGN_IN_API, gso).build();
+
 	}
 
-	// Properties
-	@Kroll.getProperty
-	public String getExampleProp()
-	{
-		Log.d(LCAT, "get example property");
-		return "hello world";
-	}
-
-
-	@Kroll.setProperty
-	public void setExampleProp(String value) {
-		Log.d(LCAT, "set example property: " + value);
+	private static String loadJSONFromAsset() {
+		String json = null;
+		try {
+			String url = resolveUrl(null, "google-services.json");
+			Log.d(LCAT, "path of google-services.json = " + url);
+			InputStream inStream = TiFileFactory.createTitaniumFile(
+					new String[] { url }, false).getInputStream();
+			byte[] buffer = new byte[inStream.available()];
+			inStream.read(buffer);
+			inStream.close();
+			json = new String(buffer, "UTF-8");
+		} catch (IOException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+		return json;
 	}
 
 }
-
