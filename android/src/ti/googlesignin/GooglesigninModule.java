@@ -85,52 +85,63 @@ public class GooglesigninModule extends KrollModule implements
 			e.printStackTrace();
 		}
 
-		// Configure sign-in to request the user's ID, email address, and basic
-		// profile. ID and
-		// basic profile are included in DEFAULT_SIGN_IN.
 		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
 				GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-
+		// https://developers.google.com/android/guides/api-client#manually_managed_connections
 		googleApiClient = new GoogleApiClient.Builder(ctx).addApi(Drive.API)
 				.addScope(Drive.SCOPE_FILE).addConnectionCallbacks(this)
 				.addOnConnectionFailedListener(this).build();
 
 	}
 
+	@Override
+	public void onConnectionFailed(ConnectionResult result) {
+	}
+
+	/*
+	 * After calling connect(), this method will be invoked asynchronously when
+	 * the connect request has successfully completed. After this callback, the
+	 * application can make requests on other methods provided by the client and
+	 * expect that no user intervention is required to call methods that use
+	 * account and scopes provided to the client constructor.
+	 * 
+	 * Note that the contents of the connectionHint Bundle are defined by the
+	 * specific services. Please see the documentation of the specific
+	 * implementation of GoogleApiClient you are using for more information.
+	 * Parameters
+	 */
+	@Override
+	public void onConnected(Bundle bundle) {
+	}
+
+	/*
+	 * Called when the client is temporarily in a disconnected state. This can
+	 * happen if there is a problem with the remote service (e.g. a crash or
+	 * resource problem causes it to be killed by the system). When called, all
+	 * requests have been canceled and no outstanding listeners will be
+	 * executed. GoogleApiClient will automatically attempt to restore the
+	 * connection. Applications should disable UI components that require the
+	 * service, and wait for a call to onConnected(Bundle) to re-enable
+	 */
+
+	@Override
+	public void onConnectionSuspended(int result) {
+	}
+
 	private String loadJSONFromAsset() {
-		String json = null;
+		String jsonString = null;
 		try {
-			String url = resolveUrl(null, "google-services.json");
-			Log.d(LCAT, "path of google-services.json = " + url);
 			InputStream inStream = TiFileFactory.createTitaniumFile(
-					new String[] { url }, false).getInputStream();
+					new String[] { resolveUrl(null, "google-services.json") },
+					false).getInputStream();
 			byte[] buffer = new byte[inStream.available()];
 			inStream.read(buffer);
 			inStream.close();
-			json = new String(buffer, "UTF-8");
+			jsonString = new String(buffer, "UTF-8");
 		} catch (IOException ex) {
 			ex.printStackTrace();
 			return null;
 		}
-		return json;
+		return jsonString;
 	}
-
-	@Override
-	public void onConnectionFailed(ConnectionResult arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onConnected(Bundle arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onConnectionSuspended(int arg0) {
-		// TODO Auto-generated method stub
-
-	}
-
 }
