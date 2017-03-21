@@ -95,13 +95,11 @@ public class GooglesigninModule extends KrollModule implements
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
-				GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
-
-		// https://developers.google.com/android/guides/api-client#manually_managed_connections
 		googleApiClient = new GoogleApiClient.Builder(ctx)
-				// Specify which Apis are requested by your app.
-				.addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+				.addApi(Auth.GOOGLE_SIGN_IN_API,
+						new GoogleSignInOptions.Builder(
+								GoogleSignInOptions.DEFAULT_SIGN_IN)
+								.requestEmail().build())
 				.addConnectionCallbacks(this).useDefaultAccount()
 				.addOnConnectionFailedListener(this)//
 				.build();
