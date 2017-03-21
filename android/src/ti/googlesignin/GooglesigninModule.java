@@ -20,7 +20,7 @@ import org.appcelerator.kroll.common.TiConfig;
 import org.json.JSONException;
 import org.json.JSONObject;
 import android.support.v4.*;
-
+import android.support.v4.app.FragmentActivity;
 import android.content.Context;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
