@@ -11,15 +11,21 @@ package ti.googlesignin;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.titanium.io.TiFileFactory;
+import org.appcelerator.titanium.util.TiActivityResultHandler;
+import org.appcelerator.titanium.util.TiActivitySupport;
 import org.appcelerator.kroll.common.Log;
 import org.appcelerator.kroll.common.TiConfig;
+import org.appcelerator.kroll.common.TiMessenger;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ti.paypal.PaymentProxy;
+import ti.paypal.PaymentProxy.PaymentResultHandler;
 import android.support.v4.*;
 import android.support.v4.app.FragmentActivity;
 import android.app.Activity;
@@ -27,14 +33,21 @@ import android.content.Context;
 
 import com.google.android.gms.drive.*;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.paypal.android.sdk.payments.PayPalAuthorization;
+import com.paypal.android.sdk.payments.PayPalFuturePaymentActivity;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
+import com.paypal.android.sdk.payments.ProofOfPayment;
 
 @Kroll.module(name = "Googlesignin", id = "ti.googlesignin")
 public class GooglesigninModule extends KrollModule implements
@@ -43,6 +56,7 @@ public class GooglesigninModule extends KrollModule implements
 	// Standard Debugging variables
 	public static final String LCAT = "GSignin";
 	private static final boolean DBG = TiConfig.LOGD;
+	private static int RC_SIGN_IN = 34;
 
 	// You can define constants with @Kroll.constant, for example:
 	// @Kroll.constant
@@ -76,7 +90,7 @@ public class GooglesigninModule extends KrollModule implements
 
 	@Kroll.method
 	public void init() {
-		Context ctx = TiApplication.getInstance();
+		Context ctx = TiApplication.getInstance().getApplicationContext();
 		String packageName = TiApplication.getAppCurrentActivity()
 				.getPackageName();
 		try {
@@ -91,7 +105,34 @@ public class GooglesigninModule extends KrollModule implements
 		googleApiClient = new GoogleApiClient.Builder(ctx).addApi(Drive.API)
 				.addScope(Drive.SCOPE_FILE).addConnectionCallbacks(this)
 				.addOnConnectionFailedListener(this).build();
+		final Intent signInIntent = Auth.GoogleSignInApi
+				.getSignInIntent(googleApiClient);
+		final TiActivitySupport activitySupport = (TiActivitySupport) TiApplication
+				.getInstance().getCurrentActivity();
+		if (TiApplication.isUIThread()) {
+			activitySupport.launchActivityForResult(signInIntent, RC_SIGN_IN,
+					new SignInResultHandler());
+		} else {
+			TiMessenger.postOnMain(new Runnable() {
+				@Override
+				public void run() {
+					activitySupport.launchActivityForResult(signInIntent,
+							RC_SIGN_IN, new SignInResultHandler());
+				}
+			});
+		}
 
+	}
+
+	private final class SignInResultHandler implements TiActivityResultHandler {
+		public void onError(Activity arg0, int arg1, Exception e) {
+			Log.e(LCAT, e.getMessage());
+		}
+
+		public void onResult(Activity dummy, int requestCode, int resultCode,
+				Intent data) {
+
+		}
 	}
 
 	@Override
@@ -108,7 +149,6 @@ public class GooglesigninModule extends KrollModule implements
 	 * Note that the contents of the connectionHint Bundle are defined by the
 	 * specific services. Please see the documentation of the specific
 	 * implementation of GoogleApiClient you are using for more information.
-	 * Parameters
 	 */
 	@Override
 	public void onConnected(Bundle bundle) {
