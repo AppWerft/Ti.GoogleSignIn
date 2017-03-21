@@ -16,15 +16,17 @@ public class GooglePlayService {
 	public GooglePlayService() {
 	}
 
-	public static boolean importJSON(JSONObject json) {
+	public static String importJSON(JSONObject json) {
+		String clientId = null;
 		try {
-			JSONObject projectInfo = json.getJSONObject("project_info");
+			clientId = json.getJSONObject("project_info")
+					.getJSONArray("client").getJSONObject(0)
+					.getJSONArray("oauth_client").getJSONObject(0)
+					.getString("client_id");
+
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return true;
-
+		return clientId;
 	}
-
 }

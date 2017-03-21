@@ -54,8 +54,9 @@ public class GooglesigninModule extends KrollModule implements
 	public static final String LCAT = "GSignin";
 	private static final boolean DBG = TiConfig.LOGD;
 	private static int RC_SIGN_IN = 34;
-	Context ctx;
-	String packageName;
+	private Context ctx;
+	private String packageName;
+	private String web_client_key = "";
 
 	// You can define constants with @Kroll.constant, for example:
 	// @Kroll.constant
@@ -90,13 +91,17 @@ public class GooglesigninModule extends KrollModule implements
 
 	@Kroll.method
 	public void init() {
+		// http://yasirameen.com/2016/05/sign-in-with-google/
 		try {
-			GooglePlayService.importJSON(new JSONObject(loadJSONFromAsset()));
+			web_client_key = GooglePlayService.importJSON(new JSONObject(
+					loadJSONFromAsset()));
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 		GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions.Builder(
-				GoogleSignInOptions.DEFAULT_SIGN_IN).requestEmail().build();
+				GoogleSignInOptions.DEFAULT_SIGN_IN)
+				.requestIdToken(web_client_key).requestEmail().build();
 
 		googleApiClient = new GoogleApiClient.Builder(ctx)
 				.addApi(Auth.GOOGLE_SIGN_IN_API, googleSignInOptions)
