@@ -56,7 +56,8 @@ public class GooglesigninModule extends KrollModule implements
 	private static int RC_SIGN_IN = 34;
 	private Context ctx;
 	private String packageName;
-	private String web_client_key = "";
+	private String clientKeyfromGoogleServicesJSON = "";
+	private String clientId;
 
 	// You can define constants with @Kroll.constant, for example:
 	// @Kroll.constant
@@ -90,17 +91,20 @@ public class GooglesigninModule extends KrollModule implements
 	}
 
 	@Kroll.method
-	public void init() {
-		// http://yasirameen.com/2016/05/sign-in-with-google/
-		try {
-			web_client_key = GoogleServices.getClientId(new JSONObject(
-					loadJSONFromAsset("google-services.json")));
-		} catch (JSONException e) {
-			e.printStackTrace();
+	public void initialize(KrollDict opts) {
+		if (opts.containsKeyAndNotNull("clientId")) {
+			clientId = opts.getString(clientId);
 		}
+		// http://yasirameen.com/2016/05/sign-in-with-google/
+		/*
+		 * try { clientKeyfromGoogleServicesJSON = GoogleServices
+		 * .getClientId(new JSONObject(
+		 * loadJSONFromAsset("google-services.json"))); } catch (JSONException
+		 * e) { e.printStackTrace(); }
+		 */
 		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
-				GoogleSignInOptions.DEFAULT_SIGN_IN)
-				.requestIdToken(web_client_key).requestEmail().build();
+				GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(clientId)
+				.requestEmail().build();
 
 		googleApiClient = new GoogleApiClient.Builder(ctx)
 				.addApi(Auth.GOOGLE_SIGN_IN_API, gso)
@@ -108,7 +112,10 @@ public class GooglesigninModule extends KrollModule implements
 				.addConnectionCallbacks(this).useDefaultAccount()
 				.addOnConnectionFailedListener(this)//
 				.build();
+	}
 
+	@Kroll.method
+	public void signIn() {
 		final Intent signInIntent = Auth.GoogleSignInApi
 				.getSignInIntent(googleApiClient);
 		final TiActivitySupport activitySupport = (TiActivitySupport) TiApplication
