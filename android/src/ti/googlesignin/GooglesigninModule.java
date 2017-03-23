@@ -110,7 +110,7 @@ public class GooglesigninModule extends KrollModule implements
 	}
 
 	@Kroll.method
-	public void signIn() {
+	protected synchronized void signIn() {
 		Log.d(LCAT, "signIn with " + googleApiClient.toString());
 		// Building of intent
 		final Intent signInIntent = Auth.GoogleSignInApi
