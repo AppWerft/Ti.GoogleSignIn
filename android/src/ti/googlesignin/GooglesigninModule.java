@@ -69,21 +69,25 @@ public class GooglesigninModule extends KrollModule implements
 	@Override
 	public void onStart(Activity activity) {
 		Log.d(LCAT, "[MODULE LIFECYCLE EVENT] start");
-		googleApiClient.connect();
+		if (googleApiClient != null)
+			googleApiClient.connect();
 		super.onStart(activity);
 	}
 
 	@Override
 	public void onStop(Activity activity) {
 		Log.d(LCAT, "[MODULE LIFECYCLE EVENT] stop");
-		googleApiClient.disconnect();
+		if (googleApiClient != null)
+			googleApiClient.disconnect();
 		super.onStop(activity);
 	}
 
 	@Kroll.method
 	public void initialize(KrollDict opts) {
+		Log.d(LCAT, "try to initialize the client");
 		if (opts.containsKeyAndNotNull("clientId")) {
 			clientId = opts.getString(clientId);
+			Log.d(LCAT, clientId + " read");
 		}
 		// http://yasirameen.com/2016/05/sign-in-with-google/
 		/*
@@ -95,10 +99,10 @@ public class GooglesigninModule extends KrollModule implements
 		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
 				GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(clientId)
 				.requestEmail().build();
-
+		Log.d(LCAT, gso.toString());
+		Log.d(LCAT, "gso built, try to build googleApiClient");
 		googleApiClient = new GoogleApiClient.Builder(ctx)
 				.addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-
 				.addConnectionCallbacks(this).useDefaultAccount()
 				.addOnConnectionFailedListener(this)//
 				.build();
@@ -106,6 +110,7 @@ public class GooglesigninModule extends KrollModule implements
 
 	@Kroll.method
 	public void signIn() {
+		Log.d(LCAT, "signIn");
 		final Intent signInIntent = Auth.GoogleSignInApi
 				.getSignInIntent(googleApiClient);
 		final TiActivitySupport activitySupport = (TiActivitySupport) TiApplication
