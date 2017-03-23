@@ -83,10 +83,10 @@ public class GooglesigninModule extends KrollModule implements
 	}
 
 	@Kroll.method
-	public void initialize(KrollDict opts) {
+	protected synchronized void initialize(KrollDict opts) {
 		Log.d(LCAT, "try to initialize the client");
 		if (opts.containsKeyAndNotNull("clientId")) {
-			clientId = opts.getString(clientId);
+			clientId = opts.getString("clientId");
 			Log.d(LCAT, clientId + " read");
 		}
 		// http://yasirameen.com/2016/05/sign-in-with-google/
@@ -98,7 +98,7 @@ public class GooglesigninModule extends KrollModule implements
 		 */
 		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
 				GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(clientId)
-				.requestEmail().build();
+				.requestProfile().requestEmail().build();
 		Log.d(LCAT, gso.toString());
 		Log.d(LCAT, "gso built, try to build googleApiClient");
 		googleApiClient = new GoogleApiClient.Builder(ctx)
@@ -106,15 +106,20 @@ public class GooglesigninModule extends KrollModule implements
 				.addConnectionCallbacks(this).useDefaultAccount()
 				.addOnConnectionFailedListener(this)//
 				.build();
+
 	}
 
 	@Kroll.method
 	public void signIn() {
-		Log.d(LCAT, "signIn");
+		Log.d(LCAT, "signIn with " + googleApiClient.toString());
+		// Building of intent
 		final Intent signInIntent = Auth.GoogleSignInApi
 				.getSignInIntent(googleApiClient);
+		Log.d(LCAT, "signInIntent built");
+		// building new activity with result handler
 		final TiActivitySupport activitySupport = (TiActivitySupport) TiApplication
 				.getInstance().getCurrentActivity();
+		Log.d(LCAT, "TiActivitySupport built");
 		if (TiApplication.isUIThread()) {
 			activitySupport.launchActivityForResult(signInIntent, RC_SIGN_IN,
 					new SignInResultHandler());
@@ -127,7 +132,6 @@ public class GooglesigninModule extends KrollModule implements
 				}
 			});
 		}
-
 	}
 
 	private final class SignInResultHandler implements TiActivityResultHandler {

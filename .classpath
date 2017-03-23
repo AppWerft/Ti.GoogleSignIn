@@ -17,5 +17,7 @@
 	<classpathentry kind="lib" path="/Users/fuerst/Library/android-sdk-macosx/extras/android/support/v4/android-support-v4.jar"/>
 	<classpathentry kind="lib" path="/Users/fuerst/Documents/APPC_WORKSPACE/Ti.GoogleSignIn/android/lib/google-play-services-drive-10.2.0.jar"/>
 	<classpathentry kind="lib" path="/Users/fuerst/Documents/APPC_WORKSPACE/Ti.GoogleSignIn/android/lib/google-play-service-auth-10.2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/fuerst/Documents/APPC_WORKSPACE/Ti.GoogleSignIn/android/lib/google-play-services-auth-base-10.2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/fuerst/Documents/APPC_WORKSPACE/Ti.GoogleSignIn/android/lib/google-play-services-tasks-10.2.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
