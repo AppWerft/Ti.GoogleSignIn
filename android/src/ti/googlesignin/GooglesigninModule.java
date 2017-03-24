@@ -106,7 +106,7 @@ public class GooglesigninModule extends KrollModule implements
 				.addConnectionCallbacks(this).useDefaultAccount()
 				.addOnConnectionFailedListener(this)//
 				.build();
-
+		Log.d(LCAT, "googleApiClient built, finished initialized");
 	}
 
 	@Kroll.method

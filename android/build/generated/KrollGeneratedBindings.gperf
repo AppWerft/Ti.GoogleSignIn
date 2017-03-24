@@ -12,5 +12,5 @@
 %}
 struct titanium::bindings::BindEntry;
 %%
-ti.googlesignin.GooglesigninModule, ::ti::googlesignin::GooglesigninModule::bindProxy, ::ti::googlesignin::GooglesigninModule::dispose
+ti.googlesignin.GooglesigninModule,::ti::googlesignin::GooglesigninModule::bindProxy,::ti::googlesignin::GooglesigninModule::dispose
 %%

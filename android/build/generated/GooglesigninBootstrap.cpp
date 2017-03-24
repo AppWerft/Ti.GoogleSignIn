@@ -82,6 +82,7 @@ static void Googlesignin_init(Local<Object> exports, Local<Context> context)
 
 		exports->Set(name, source);
 	}
+
 	Local<FunctionTemplate> constructor = FunctionTemplate::New(isolate, Googlesignin_getBinding);
 	exports->Set(String::NewFromUtf8(isolate, "getBinding"), constructor->GetFunction(context).ToLocalChecked());
 }

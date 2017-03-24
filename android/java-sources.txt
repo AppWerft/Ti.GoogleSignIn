@@ -1,0 +1,2 @@
+"/Users/rodrigofelga/Documents/Appcelerator_Studio_Workspace/Ti.GoogleSignIn/android/src/ti/googlesignin/GoogleServices.java"
+"/Users/rodrigofelga/Documents/Appcelerator_Studio_Workspace/Ti.GoogleSignIn/android/src/ti/googlesignin/GooglesigninModule.java"

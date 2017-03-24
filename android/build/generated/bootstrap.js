@@ -25,7 +25,7 @@ function moduleBootstrap(moduleBinding) {
 	}
 
 	
-			return module;
+	return module;
 
 }
 exports.bootstrap = moduleBootstrap;

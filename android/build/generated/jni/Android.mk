@@ -34,7 +34,4 @@ $(BOOTSTRAP_CPP): $(GEN_DIR)/KrollGeneratedBindings.cpp $(GEN_DIR)/BootstrapJS.c
 $(GEN_DIR)/KrollGeneratedBindings.cpp:
 	gperf -L C++ -E -t "$(GEN_DIR)/KrollGeneratedBindings.gperf" > "$(GEN_DIR)/KrollGeneratedBindings.cpp"
 
-$(GEN_DIR)/BootstrapJS.cpp:
-	"$(PYTHON)" "$(TI_MOBILE_SDK)/module/android/js2c.py" "$(GEN_DIR)/BootstrapJS.cpp" "$(GEN_DIR)/bootstrap.js"
-
 include $(BUILD_SHARED_LIBRARY)
