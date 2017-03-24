@@ -29,8 +29,9 @@ private:
 	static v8::Persistent<v8::FunctionTemplate> proxyTemplate;
 
 	// Methods -----------------------------------------------------------
-	static void signIn(const v8::FunctionCallbackInfo<v8::Value>&);
+	static void signOut(const v8::FunctionCallbackInfo<v8::Value>&);
 	static void initialize(const v8::FunctionCallbackInfo<v8::Value>&);
+	static void signIn(const v8::FunctionCallbackInfo<v8::Value>&);
 
 	// Dynamic property accessors ----------------------------------------
 

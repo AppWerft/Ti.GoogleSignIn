@@ -84,8 +84,9 @@ Local<FunctionTemplate> GooglesigninModule::getProxyTemplate(Isolate* isolate)
 	titanium::ProxyFactory::registerProxyPair(javaClass, *t);
 
 	// Method bindings --------------------------------------------------------
-	titanium::SetProtoMethod(isolate, t, "signIn", GooglesigninModule::signIn);
+	titanium::SetProtoMethod(isolate, t, "signOut", GooglesigninModule::signOut);
 	titanium::SetProtoMethod(isolate, t, "initialize", GooglesigninModule::initialize);
+	titanium::SetProtoMethod(isolate, t, "signIn", GooglesigninModule::signIn);
 
 	Local<ObjectTemplate> prototypeTemplate = t->PrototypeTemplate();
 	Local<ObjectTemplate> instanceTemplate = t->InstanceTemplate();
@@ -104,9 +105,9 @@ Local<FunctionTemplate> GooglesigninModule::getProxyTemplate(Isolate* isolate)
 }
 
 // Methods --------------------------------------------------------------------
-void GooglesigninModule::signIn(const FunctionCallbackInfo<Value>& args)
+void GooglesigninModule::signOut(const FunctionCallbackInfo<Value>& args)
 {
-	LOGD(TAG, "signIn()");
+	LOGD(TAG, "signOut()");
 	Isolate* isolate = args.GetIsolate();
 	HandleScope scope(isolate);
 
@@ -117,9 +118,9 @@ void GooglesigninModule::signIn(const FunctionCallbackInfo<Value>& args)
 	}
 	static jmethodID methodID = NULL;
 	if (!methodID) {
-		methodID = env->GetMethodID(GooglesigninModule::javaClass, "signIn", "()V");
+		methodID = env->GetMethodID(GooglesigninModule::javaClass, "signOut", "()V");
 		if (!methodID) {
-			const char *error = "Couldn't find proxy method 'signIn' with signature '()V'";
+			const char *error = "Couldn't find proxy method 'signOut' with signature '()V'";
 			LOGE(TAG, error);
 				titanium::JSException::Error(isolate, error);
 				return;
@@ -222,6 +223,58 @@ void GooglesigninModule::initialize(const FunctionCallbackInfo<Value>& args)
 			if (isNew_0) {
 				env->DeleteLocalRef(jArguments[0].l);
 			}
+
+
+	if (env->ExceptionCheck()) {
+		titanium::JSException::fromJavaException(isolate);
+		env->ExceptionClear();
+	}
+
+
+
+
+	args.GetReturnValue().Set(v8::Undefined(isolate));
+
+}
+void GooglesigninModule::signIn(const FunctionCallbackInfo<Value>& args)
+{
+	LOGD(TAG, "signIn()");
+	Isolate* isolate = args.GetIsolate();
+	HandleScope scope(isolate);
+
+	JNIEnv *env = titanium::JNIScope::getEnv();
+	if (!env) {
+		titanium::JSException::GetJNIEnvironmentError(isolate);
+		return;
+	}
+	static jmethodID methodID = NULL;
+	if (!methodID) {
+		methodID = env->GetMethodID(GooglesigninModule::javaClass, "signIn", "()V");
+		if (!methodID) {
+			const char *error = "Couldn't find proxy method 'signIn' with signature '()V'";
+			LOGE(TAG, error);
+				titanium::JSException::Error(isolate, error);
+				return;
+		}
+	}
+
+	Local<Object> holder = args.Holder();
+	// If holder isn't the JavaObject wrapper we expect, look up the prototype chain
+	if (!JavaObject::isJavaObject(holder)) {
+		holder = holder->FindInstanceInPrototypeChain(getProxyTemplate(isolate));
+	}
+
+	titanium::Proxy* proxy = titanium::Proxy::unwrap(holder);
+
+	jvalue* jArguments = 0;
+
+	jobject javaProxy = proxy->getJavaObject();
+	env->CallVoidMethodA(javaProxy, methodID, jArguments);
+
+	if (!JavaObject::useGlobalRefs) {
+		env->DeleteLocalRef(javaProxy);
+	}
+
 
 
 	if (env->ExceptionCheck()) {
