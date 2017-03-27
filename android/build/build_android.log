@@ -1,5 +1,5 @@
 
-3/27/2017, 9:44:36 AM
+3/27/2017, 9:55:06 AM
 
 Operating System
   Name                        = Mac OS X
@@ -21,7 +21,7 @@ Titanium SDK
   Target Platform             = android
 
 Command
-  /usr/local/bin/node /Users/rodrigofelga/.appcelerator/install/6.1.0/package/node_modules/titanium/lib/titanium.js build run --platform android --project-dir /Users/rodrigofelga/Documents/Appcelerator_Studio_Workspace/Ti.GoogleSignIn/android --build-only --no-colors --no-progress-bars --no-prompt --no-banner --prompt-type socket-bundle --prompt-port 53755 --config-file /var/folders/l6/h83kx5qx48x44knlrfy3dd3w0000gn/T/build-1490618668243.json --log-level info --no-banner --project-dir /Users/rodrigofelga/Documents/Appcelerator_Studio_Workspace/Ti.GoogleSignIn/android
+  /usr/local/bin/node /Users/rodrigofelga/.appcelerator/install/6.1.0/package/node_modules/titanium/lib/titanium.js build run --platform android --project-dir /Users/rodrigofelga/Documents/Appcelerator_Studio_Workspace/Ti.GoogleSignIn/android --build-only --no-colors --no-progress-bars --no-prompt --no-banner --prompt-type socket-bundle --prompt-port 53755 --config-file /var/folders/l6/h83kx5qx48x44knlrfy3dd3w0000gn/T/build-1490619296770.json --log-level info --no-banner --project-dir /Users/rodrigofelga/Documents/Appcelerator_Studio_Workspace/Ti.GoogleSignIn/android
 
 [INFO]   javac Max Memory: 256M
 [INFO]   javac Source: 1.6
@@ -50,5 +50,5 @@ Compiling all java source files generated
 [INFO]   Packaging the module
 [INFO]   Generate module JAR: jar "cf" "/Users/rodrigofelga/Documents/Appcelerator_Studio_Workspace/Ti.GoogleSignIn/android/dist/googlesignin.jar" "-C" "/Users/rodrigofelga/Documents/Appcelerator_Studio_Workspace/Ti.GoogleSignIn/android/build/classes" "."
 [INFO]   Creating module zip
-[INFO]   Writing module zip: /Users/rodrigofelga/Documents/Appcelerator_Studio_Workspace/Ti.GoogleSignIn/android/dist/ti.googlesignin-android-1.0.4.zip
-[INFO]   Project built successfully in 21s 641ms
+[INFO]   Writing module zip: /Users/rodrigofelga/Documents/Appcelerator_Studio_Workspace/Ti.GoogleSignIn/android/dist/ti.googlesignin-android-1.0.5.zip
+[INFO]   Project built successfully in 18s 183ms
