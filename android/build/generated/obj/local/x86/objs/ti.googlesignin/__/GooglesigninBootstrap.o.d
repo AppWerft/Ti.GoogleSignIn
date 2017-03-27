@@ -1,6 +1,6 @@
 /Users/rodrigofelga/Documents/Appcelerator_Studio_Workspace/Ti.GoogleSignIn/android/build/generated/obj/local/x86/objs/ti.googlesignin/__/GooglesigninBootstrap.o: \
  jni/../GooglesigninBootstrap.cpp \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/v8.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/v8.h \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/../../android/support/include/stdint.h \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/../../android/support/include/stdio.h \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/../../android/support/include/wchar.h \
@@ -32,14 +32,14 @@
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/climits \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/stdexcept \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/__split_buffer \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/v8-version.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/v8config.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/AndroidUtil.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/v8-version.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/v8config.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/AndroidUtil.h \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/../../android/support/include/stdlib.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/JNIUtil.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/AndroidUtil.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/JSException.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/KrollBindings.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/JNIUtil.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/AndroidUtil.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/JSException.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/KrollBindings.h \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/map \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/__tree \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/functional \
@@ -49,15 +49,15 @@
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/cwctype \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/cctype \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/../../android/support/include/ctype.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/V8Util.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/V8Util.h \
  jni/../BootstrapJS.cpp jni/../KrollGeneratedBindings.cpp \
  jni/ti.googlesignin.GooglesigninModule.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/Proxy.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/JavaObject.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/EventEmitter.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/NativeObject.h
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/Proxy.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/JavaObject.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/EventEmitter.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/NativeObject.h
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/v8.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/v8.h:
 
 /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/../../android/support/include/stdint.h:
 
@@ -121,21 +121,21 @@
 
 /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/__split_buffer:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/v8-version.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/v8-version.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/v8config.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/v8config.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/AndroidUtil.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/AndroidUtil.h:
 
 /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/../../android/support/include/stdlib.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/JNIUtil.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/JNIUtil.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/AndroidUtil.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/AndroidUtil.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/JSException.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/JSException.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/KrollBindings.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/KrollBindings.h:
 
 /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/map:
 
@@ -155,7 +155,7 @@
 
 /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/../../android/support/include/ctype.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/V8Util.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/V8Util.h:
 
 jni/../BootstrapJS.cpp:
 
@@ -163,10 +163,10 @@ jni/../KrollGeneratedBindings.cpp:
 
 jni/ti.googlesignin.GooglesigninModule.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/Proxy.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/Proxy.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/JavaObject.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/JavaObject.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/EventEmitter.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/EventEmitter.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/NativeObject.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/NativeObject.h:

@@ -1,8 +1,8 @@
 /Users/rodrigofelga/Documents/Appcelerator_Studio_Workspace/Ti.GoogleSignIn/android/build/generated/obj/local/armeabi-v7a/objs/ti.googlesignin/ti.googlesignin.GooglesigninModule.o: \
  jni/ti.googlesignin.GooglesigninModule.cpp \
  jni/ti.googlesignin.GooglesigninModule.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/Proxy.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/v8.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/Proxy.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/v8.h \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/../../android/support/include/stdint.h \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/../../android/support/include/stdio.h \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/../../android/support/include/wchar.h \
@@ -34,31 +34,31 @@
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/climits \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/stdexcept \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/__split_buffer \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/v8-version.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/v8config.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/JavaObject.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/EventEmitter.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/NativeObject.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/AndroidUtil.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/v8-version.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/v8config.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/JavaObject.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/EventEmitter.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/NativeObject.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/AndroidUtil.h \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/../../android/support/include/stdlib.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/EventEmitter.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/JNIUtil.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/AndroidUtil.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/JSException.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/ProxyFactory.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/TypeConverter.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/EventEmitter.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/JNIUtil.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/AndroidUtil.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/JSException.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/ProxyFactory.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/TypeConverter.h \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/map \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/__tree \
  /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/functional \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/V8Util.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/org.appcelerator.kroll.KrollModule.h \
- /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/Proxy.h
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/V8Util.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/org.appcelerator.kroll.KrollModule.h \
+ /Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/Proxy.h
 
 jni/ti.googlesignin.GooglesigninModule.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/Proxy.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/Proxy.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/v8.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/v8.h:
 
 /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/../../android/support/include/stdint.h:
 
@@ -122,31 +122,31 @@ jni/ti.googlesignin.GooglesigninModule.h:
 
 /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/__split_buffer:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/v8-version.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/v8-version.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/v8config.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/v8config.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/JavaObject.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/JavaObject.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/EventEmitter.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/EventEmitter.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/NativeObject.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/NativeObject.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/AndroidUtil.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/AndroidUtil.h:
 
 /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/../../android/support/include/stdlib.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/EventEmitter.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/EventEmitter.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/JNIUtil.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/JNIUtil.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/AndroidUtil.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/AndroidUtil.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/JSException.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/JSException.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/ProxyFactory.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/ProxyFactory.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/TypeConverter.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/TypeConverter.h:
 
 /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/map:
 
@@ -154,8 +154,8 @@ jni/ti.googlesignin.GooglesigninModule.h:
 
 /Users/rodrigofelga/Downloads/android-ndk-r11c/sources/cxx-stl/llvm-libc++/libcxx/include/functional:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/V8Util.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/V8Util.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/org.appcelerator.kroll.KrollModule.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/org.appcelerator.kroll.KrollModule.h:
 
-/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/native/include/Proxy.h:
+/Users/rodrigofelga/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.3.GA/android/native/include/Proxy.h:
