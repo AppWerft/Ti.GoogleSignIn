@@ -32,6 +32,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
@@ -77,8 +79,8 @@ public class GooglesigninModule extends KrollModule implements
 	@Override
 	public void onStop(Activity activity) {
 		Log.d(LCAT, "[MODULE LIFECYCLE EVENT] stop");
-		if (googleApiClient != null)
-			googleApiClient.disconnect();
+		//if (googleApiClient != null)
+		//	googleApiClient.disconnect();
 		super.onStop(activity);
 	}
 
@@ -103,10 +105,10 @@ public class GooglesigninModule extends KrollModule implements
 		Log.d(LCAT, "gso built, try to build googleApiClient");
 		googleApiClient = new GoogleApiClient.Builder(ctx)
 				.addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-				.addConnectionCallbacks(this).useDefaultAccount()
-				.addOnConnectionFailedListener(this)//
+				.addConnectionCallbacks(this)
+				.addOnConnectionFailedListener(this)
 				.build();
-
+		Log.d(LCAT, "googleApiClient built, finished initialized");
 	}
 
 	@Kroll.method
@@ -134,6 +136,22 @@ public class GooglesigninModule extends KrollModule implements
 		}
 	}
 
+	@Kroll.method
+	protected synchronized void signOut() {
+       Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(Status status) {
+                       Log.d(LCAT, "oResult SignOut");
+                       KrollDict kd = new KrollDict();
+                       kd.put("status", status.getStatusCode());
+                       kd.put("status1", status.toString());
+						if (hasListeners("onsignout"))
+							fireEvent("onsignout", kd);
+                    }
+                });
+	}
+
 	private final class SignInResultHandler implements TiActivityResultHandler {
 		public void onError(Activity arg0, int arg1, Exception e) {
 			Log.e(LCAT, e.getMessage());
@@ -141,12 +159,15 @@ public class GooglesigninModule extends KrollModule implements
 
 		public void onResult(Activity dummy, int requestCode, int resultCode,
 				Intent data) {
+			Log.d(LCAT, "onResult");
 			if (requestCode == RC_SIGN_IN) {
 				GoogleSignInResult result = Auth.GoogleSignInApi
 						.getSignInResultFromIntent(data);
 				KrollDict kd = new KrollDict();
 				if (result.isSuccess()) {
+					Log.d(LCAT, "Success");
 					GoogleSignInAccount acct = result.getSignInAccount();
+					Log.d(LCAT, acct.getDisplayName());
 					kd.put("fullName", acct.getDisplayName());
 					kd.put("email", acct.getEmail());
 					kd.put("photo", acct.getPhotoUrl().toString());
@@ -158,6 +179,7 @@ public class GooglesigninModule extends KrollModule implements
 					if (hasListeners("onsuccess"))
 						fireEvent("onsuccess", kd);
 				} else {
+					Log.e(LCAT, result.toString());
 					kd.put("error", result.toString());
 					if (hasListeners("onerror"))
 						fireEvent("onerror", kd);
@@ -169,6 +191,7 @@ public class GooglesigninModule extends KrollModule implements
 
 	@Override
 	public void onConnectionFailed(ConnectionResult result) {
+		Log.e(LCAT, "onConnectionFailed");
 	}
 
 	/*
@@ -184,6 +207,7 @@ public class GooglesigninModule extends KrollModule implements
 	 */
 	@Override
 	public void onConnected(Bundle bundle) {
+		Log.d(LCAT, "onConnected");
 	}
 
 	/*
@@ -198,6 +222,7 @@ public class GooglesigninModule extends KrollModule implements
 
 	@Override
 	public void onConnectionSuspended(int result) {
+		Log.d(LCAT, "onConnectionSuspended");
 	}
 
 	private String loadJSONFromAsset(String jsonfile) {
