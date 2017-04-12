@@ -1,5 +1,5 @@
 # Ti.GoogleSignIn (Android)   
-<img src="example/demo.gif" height="300" alt="Google SignIn" />   
+<img src="example/demo.gif" height="500" alt="Google SignIn" />   
 
 ## Summary
 Ti.GoogleSignIn is an open-source project to support the Google SignIn Android-SDK in Appcelerator's Titanium Mobile.
