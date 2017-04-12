@@ -2,13 +2,13 @@
 # this is your module manifest and used by Titanium
 # during compilation, packaging, distribution, etc.
 #
-version: 1.0.5
+version: 1.0.6
 apiversion: 3
 architectures: armeabi-v7a x86
 description: googlesignin
 author: Rainer Schleevoigt
 license: Apache
-copyright: Copyright (c) 2017 by 
+copyright: Copyright (c) 2017 by Rainer Schleevoigt
 
 # these should not be edited
 name: googlesignin

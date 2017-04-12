@@ -1,39 +1,42 @@
-// This is a test harness for your module
-// You should do something interesting in this harness
-// to test out the module and to provide instructions
-// to users on how to use it by example.
-
-
-// open a single window
-var win = Ti.UI.createWindow({
-	backgroundColor:'white'
+var Google = require('ti.googlesignin');
+Google.initialize({
+    clientID: "123456789123-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.apps.googleusercontent.com"
 });
-var label = Ti.UI.createLabel();
-win.add(label);
+
+var win = Ti.UI.createWindow({
+    backgroundColor: '#fff'
+});
+
+var scroll = Ti.UI.createScrollView({
+    top: 40,
+    layout: 'vertical'
+});
+win.add(scroll);
+
+var btn = Ti.UI.createButton({
+    title: 'Sign In with Google'
+});
+
+Google.addEventListener('login', function(e) {
+    Ti.API.info('Logged in!');
+    Ti.API.info(' ***** RESULT: ' + JSON.stringify(e));
+
+   //ANDROID RESULT:
+   // {
+   //     "familyName": "Family",
+   //     "givenName": "Person",
+   //     "fullName": "Person Name",
+   //     "accountName": "user@domain.com",
+   //     "token": "abc",
+   //     "email": "user@domain.com",
+   //     "displayName": "User Name",
+   //     "photo": "https://lh5.googleusercontent.com/-F58Ul6-zinE/AAAAAAAAAAI/AAAAAAAAAAAA/123456789/abc-d/photo.jpg",
+   // }
+});
+
+btn.addEventListener('click', function() {
+	Google.signIn();
+});
+
+scroll.add(btn);
 win.open();
-
-// TODO: write your module tests here
-var googlesignin = require('ti.googlesignin');
-Ti.API.info("module is => " + googlesignin);
-
-label.text = googlesignin.example();
-
-Ti.API.info("module exampleProp is => " + googlesignin.exampleProp);
-googlesignin.exampleProp = "This is a test value";
-
-if (Ti.Platform.name == "android") {
-	var proxy = googlesignin.createExample({
-		message: "Creating an example Proxy",
-		backgroundColor: "red",
-		width: 100,
-		height: 100,
-		top: 100,
-		left: 150
-	});
-
-	proxy.printMessage("Hello world!");
-	proxy.message = "Hi world!.  It's me again.";
-	proxy.printMessage("Hello world!");
-	win.add(proxy);
-}
-

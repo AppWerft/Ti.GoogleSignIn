@@ -49,7 +49,7 @@ public class GooglesigninModule extends KrollModule implements
 	private Context ctx;
 	private String packageName;
 	private String clientKeyfromGoogleServicesJSON = "";
-	private String clientId;
+	private String serverClientId;
 
 	// You can define constants with @Kroll.constant, for example:
 	// @Kroll.constant
@@ -87,19 +87,16 @@ public class GooglesigninModule extends KrollModule implements
 	@Kroll.method
 	protected synchronized void initialize(KrollDict opts) {
 		Log.d(LCAT, "try to initialize the client");
-		if (opts.containsKeyAndNotNull("clientId")) {
-			clientId = opts.getString("clientId");
-			Log.d(LCAT, clientId + " read");
+		if (opts.containsKeyAndNotNull("clientID")) {
+			serverClientId = opts.getString("clientID");
+			Log.d(LCAT, serverClientId + " read");
+		}else{
+			Log.d(LCAT, "no clientID found!");
+			return;
 		}
-		// http://yasirameen.com/2016/05/sign-in-with-google/
-		/*
-		 * try { clientKeyfromGoogleServicesJSON = GoogleServices
-		 * .getClientId(new JSONObject(
-		 * loadJSONFromAsset("google-services.json"))); } catch (JSONException
-		 * e) { e.printStackTrace(); }
-		 */
+
 		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
-				GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(clientId)
+				GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(serverClientId)
 				.requestProfile().requestEmail().build();
 		Log.d(LCAT, gso.toString());
 		Log.d(LCAT, "gso built, try to build googleApiClient");
