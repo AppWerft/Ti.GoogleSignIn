@@ -9,6 +9,7 @@
 package ti.googlesignin;
 
 import org.appcelerator.kroll.KrollDict;
+import org.appcelerator.kroll.KrollFunction;
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.common.Log;
@@ -45,6 +46,7 @@ public class GooglesigninModule extends KrollModule implements
 	private Context ctx;
 	private String packageName;
 	private String serverClientId;
+	private KrollFunction onLogin;
 
 	// You can define constants with @Kroll.constant, for example:
 	// @Kroll.constant
@@ -82,6 +84,12 @@ public class GooglesigninModule extends KrollModule implements
 	@Kroll.method
 	protected synchronized void initialize(KrollDict opts) {
 		Log.d(LCAT, "try to initialize the client");
+		if (opts.containsKeyAndNotNull("onLogin")) {
+			Object o = opts.get("onLogin");
+			if (o instanceof KrollFunction) {
+				onLogin = (KrollFunction) o;
+			}
+		}
 		if (opts.containsKeyAndNotNull("clientID")) {
 			serverClientId = opts.getString("clientID");
 			Log.d(LCAT, serverClientId + " read");
@@ -186,8 +194,11 @@ public class GooglesigninModule extends KrollModule implements
 						fireEvent("onsuccess", kd);
 					}
 					if (hasListeners("login")) {
+
 						fireEvent("login", kd);
 					}
+					if (onLogin != null)
+						onLogin.call(getKrollObject(), kd);
 				} else {
 					kd.put("status", result.getStatus().getStatusCode());
 					kd.put("success", false);
