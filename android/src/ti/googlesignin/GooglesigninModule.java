@@ -252,11 +252,14 @@ public class GooglesigninModule extends KrollModule implements
 	 */
 	@Override
 	public void onConnected(Bundle bundle) {
-		KrollDict kd = new KrollDict();
-		kd.put("result", bundle.toString());
-		if (hasListeners("connect"))
-			fireEvent("connect", kd);
 		Log.d(LCAT, "onConnected");
+		if (bundle != null) {
+			KrollDict kd = new KrollDict();
+			kd.put("result", bundle.toString());
+			if (hasListeners("connect"))
+				fireEvent("connect", kd);
+
+		}
 	}
 
 	/*
