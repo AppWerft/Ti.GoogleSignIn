@@ -8,6 +8,15 @@ The iOS version with API-parity is available at [@hansemannn/Ti.GoogleSignIn](ht
 ## Requirements
   * Titanium SDK 6.0.1.GA+
 
+
+## Permissions in manifest
+```xml
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.GET_ACCOUNTS" />
+
+<uses-permission android:name="android.permission.USE_CREDENTIALS" />
+```
+
 ## Setup
 Unpack the module and place it inside the `modules/android/` folder of your project.
 Edit the modules section of your `tiapp.xml` file to include this module:
