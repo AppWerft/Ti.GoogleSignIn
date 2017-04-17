@@ -28,6 +28,7 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
@@ -47,6 +48,15 @@ public class GooglesigninModule extends KrollModule implements
 	private String packageName;
 	private String serverClientId;
 	private KrollFunction onLogin;
+
+	@Kroll.constant
+	public static final int SIGN_IN_REQUIRED = GoogleSignInStatusCodes.SIGN_IN_CANCELLED;
+	@Kroll.constant
+	public static final int NETWORK_ERROR = GoogleSignInStatusCodes.NETWORK_ERROR;
+	@Kroll.constant
+	public static final int INVALID_ACCOUNT = GoogleSignInStatusCodes.INVALID_ACCOUNT;
+	@Kroll.constant
+	public static final int INTERNAL_ERROR = GoogleSignInStatusCodes.INTERNAL_ERROR;
 
 	// You can define constants with @Kroll.constant, for example:
 	// @Kroll.constant
@@ -146,7 +156,8 @@ public class GooglesigninModule extends KrollModule implements
 					public void onResult(Status status) {
 						Log.d(LCAT, "oResult SignOut");
 						KrollDict kd = new KrollDict();
-						kd.put("status", status.getStatusCode());
+						kd.put("status", status.getStatusMessage());
+
 						if (hasListeners("onsignout")) {
 							Log.e(LCAT,
 									"The 'onsignout' event is deprecated, use 'disconnect' instead.");

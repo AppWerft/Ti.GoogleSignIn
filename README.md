@@ -68,4 +68,12 @@ You can follow same instructions used to configure a map in your Android app fro
 ## Events
 - [x] `login`
 - [x] `error`
+- [x] `connect`
 - [x] `disconnect`
+
+## Constants
+
+- [x] SIGN_IN_REQUIRED
+- [x] SUCCESS
+- [x] SUCCESS_CACHE
+- [x] TIMEOUT
