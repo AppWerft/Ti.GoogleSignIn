@@ -194,20 +194,20 @@ public class GooglesigninModule extends KrollModule implements
 						fireEvent("onsuccess", kd);
 					}
 					if (hasListeners("login")) {
-
 						fireEvent("login", kd);
 					}
 					if (onLogin != null)
 						onLogin.call(getKrollObject(), kd);
 				} else {
 					kd.put("status", result.getStatus().getStatusCode());
+					kd.put("message", result.getStatus().getStatusMessage());
+
 					kd.put("success", false);
 					if (hasListeners("onerror")) {
 						Log.e(LCAT,
 								"The 'onerror' event is deprecated, use 'error' instead.");
 						fireEvent("onerror", kd);
 					}
-
 					if (hasListeners("error")) {
 						fireEvent("error", kd);
 					}
