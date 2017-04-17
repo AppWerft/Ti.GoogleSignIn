@@ -23,8 +23,8 @@ Initialize the module by setting the Google SignIn API key you can get from the 
 var Google = require('ti.googlesignin');
 Google.initialize({
     clientID: '<client-id>',
-    onLogin : function() {
-    
+    onLogin : function(res) {
+        console.log(result);
     }
 });
 
