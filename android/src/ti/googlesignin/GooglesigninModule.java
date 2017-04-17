@@ -49,7 +49,7 @@ public class GooglesigninModule extends KrollModule implements
 	private Context ctx;
 	private String packageName;
 	private String clientKeyfromGoogleServicesJSON = "";
-	private String clientId;
+	private String serverClientId;
 
 	// You can define constants with @Kroll.constant, for example:
 	// @Kroll.constant
@@ -79,35 +79,32 @@ public class GooglesigninModule extends KrollModule implements
 	@Override
 	public void onStop(Activity activity) {
 		Log.d(LCAT, "[MODULE LIFECYCLE EVENT] stop");
-		//if (googleApiClient != null)
-		//	googleApiClient.disconnect();
+		// if (googleApiClient != null)
+		// googleApiClient.disconnect();
 		super.onStop(activity);
 	}
 
 	@Kroll.method
 	protected synchronized void initialize(KrollDict opts) {
 		Log.d(LCAT, "try to initialize the client");
-		if (opts.containsKeyAndNotNull("clientId")) {
-			clientId = opts.getString("clientId");
-			Log.d(LCAT, clientId + " read");
+		if (opts.containsKeyAndNotNull("clientID")) {
+			serverClientId = opts.getString("clientID");
+			Log.d(LCAT, serverClientId + " read");
+		} else {
+			Log.d(LCAT, "no clientID found!");
+			return;
 		}
-		// http://yasirameen.com/2016/05/sign-in-with-google/
-		/*
-		 * try { clientKeyfromGoogleServicesJSON = GoogleServices
-		 * .getClientId(new JSONObject(
-		 * loadJSONFromAsset("google-services.json"))); } catch (JSONException
-		 * e) { e.printStackTrace(); }
-		 */
+
 		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(
-				GoogleSignInOptions.DEFAULT_SIGN_IN).requestIdToken(clientId)
-				.requestProfile().requestEmail().build();
+				GoogleSignInOptions.DEFAULT_SIGN_IN)
+				.requestIdToken(serverClientId).requestProfile().requestEmail()
+				.build();
 		Log.d(LCAT, gso.toString());
 		Log.d(LCAT, "gso built, try to build googleApiClient");
 		googleApiClient = new GoogleApiClient.Builder(ctx)
 				.addApi(Auth.GOOGLE_SIGN_IN_API, gso)
 				.addConnectionCallbacks(this)
-				.addOnConnectionFailedListener(this)
-				.build();
+				.addOnConnectionFailedListener(this).build();
 		Log.d(LCAT, "googleApiClient built, finished initialized");
 	}
 
@@ -138,18 +135,28 @@ public class GooglesigninModule extends KrollModule implements
 
 	@Kroll.method
 	protected synchronized void signOut() {
-       Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
-                new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(Status status) {
-                       Log.d(LCAT, "oResult SignOut");
-                       KrollDict kd = new KrollDict();
-                       kd.put("status", status.getStatusCode());
-                       kd.put("status1", status.toString());
-						if (hasListeners("onsignout"))
-							fireEvent("onsignout", kd);
-                    }
-                });
+		Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+
+		new ResultCallback<Status>() {
+			@Override
+			public void onResult(Status status) {
+				Log.d(LCAT, "oResult SignOut");
+				KrollDict kd = new KrollDict();
+				kd.put("status", status.getStatusCode());
+				kd.put("status1", status.toString());
+
+				if (hasListeners("onsignout")) {
+					Log.e(LCAT,
+							"The 'onsignout' event is deprecated, use 'disconnect' instead.");
+					fireEvent("onsignout", kd);
+				}
+
+				if (hasListeners("disconnect")) {
+					fireEvent("disconnect", kd);
+				}
+			}
+		});
+
 	}
 
 	private final class SignInResultHandler implements TiActivityResultHandler {
@@ -168,6 +175,8 @@ public class GooglesigninModule extends KrollModule implements
 					Log.d(LCAT, "Success");
 					GoogleSignInAccount acct = result.getSignInAccount();
 					Log.d(LCAT, acct.getDisplayName());
+					Log.d(LCAT, "Login Success");
+
 					kd.put("fullName", acct.getDisplayName());
 					kd.put("email", acct.getEmail());
 					kd.put("photo", acct.getPhotoUrl().toString());
@@ -176,13 +185,31 @@ public class GooglesigninModule extends KrollModule implements
 					kd.put("givenName", acct.getGivenName());
 					kd.put("accountName", acct.getAccount().name);
 					kd.put("token", acct.getIdToken());
-					if (hasListeners("onsuccess"))
+
+					if (hasListeners("onsuccess")) {
+						Log.e(LCAT,
+								"The 'onsuccess' event is deprecated, use 'login' instead.");
 						fireEvent("onsuccess", kd);
+					}
+
+					if (hasListeners("login")) {
+						fireEvent("login", kd);
+					}
 				} else {
-					Log.e(LCAT, result.toString());
-					kd.put("error", result.toString());
-					if (hasListeners("onerror"))
+
+					kd.put("status", result.getStatus());
+					kd.put("success", false);
+					kd.put("displayName", result.getSignInAccount()
+							.getDisplayName());
+					if (hasListeners("onerror")) {
+						Log.e(LCAT,
+								"The 'onerror' event is deprecated, use 'error' instead.");
 						fireEvent("onerror", kd);
+					}
+
+					if (hasListeners("error")) {
+						fireEvent("error", kd);
+					}
 				}
 			}
 

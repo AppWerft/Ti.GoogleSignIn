@@ -1,39 +1,38 @@
-# googlesignin Module
+# Ti.GoogleSignIn (Android)
 
 ## Description
 
-TODO: Enter your module description here
+Ti.GoogleSignIn is an open-source project to support the Google SignIn Android-SDK in Appcelerator's Titanium Mobile.
+The iOS version with API-parity is available at [@hansemannn/Ti.GoogleSignIn](https://github.com/hansemannn/titanium-google-signin).
 
-## Accessing the googlesignin Module
+## Setup
 
-To access this module from JavaScript, you would do the following:
-
-    var googlesignin = require("ti.googlesignin");
-
-The googlesignin variable is a reference to the Module object.
-
-## Reference
-
-TODO: If your module has an API, you should document
-the reference here.
-
-### googlesignin.function
-
-TODO: This is an example of a module function.
-
-### googlesignin.property
-
-TODO: This is an example of a module property.
+Unpack the module and place it inside the `modules/android/` folder of your project.
+Edit the modules section of your `tiapp.xml` file to include this module:
+```xml
+<modules>
+    <module platform="android">ti.googlesignin</module>
+</modules>
+```
 
 ## Usage
 
-TODO: Enter your usage example here
+Initialize the module by setting the Google SignIn API key you can get from the Google API Console.
+```js
+var Google = require('ti.googlesignin');
+Google.initialize({
+    clientID: '<client-id>'
+});
+```
 
 ## Author
 
-TODO: Enter your author name, email and other contact
-details you want to share here.
+Rainer Schleevoigt ([AppWerft](https://github.com/AppWerft)
 
 ## License
 
-TODO: Enter your license/legal information here.
+Apache 2.0
+
+## Contributing
+
+Code contributions are greatly appreciated, please submit a new [pull request](https://github.com/AppWerft/Ti.GoogleSignIn/pull/new/master)!

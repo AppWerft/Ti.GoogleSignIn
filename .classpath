@@ -4,20 +4,18 @@
 	<classpathentry kind="src" path="android/build/.apt_generated"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="/opt/android-sdk/platforms/android-23/android.jar"/>
-	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/6.0.1.GA/android/titanium.jar"/>
-	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/6.0.1.GA/android/kroll-common.jar"/>
-	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/6.0.1.GA/android/kroll-apt.jar"/>
+	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/6.0.3.GA/android/titanium.jar"/>
+	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/6.0.3.GA/android/kroll-common.jar"/>
+	<classpathentry kind="lib" path="/Library/Application Support/Titanium/mobilesdk/osx/6.0.3.GA/android/kroll-apt.jar"/>
 	<classpathentry kind="src" path=".apt_generated">
 		<attributes>
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/fuerst/Documents/APPC_WORKSPACE/Ti.GoogleSignIn/android/lib/google-play-services-base-10.2.0.jar"/>
+	<classpathentry kind="lib" path="/opt/android-sdk/extras/android/support/v4/android-support-v4.jar"/>
+	<classpathentry kind="lib" path="/Users/fuerst/Documents/APPC_WORKSPACE/Ti.GoogleSignIn/android/lib/google-play-services-base.jar"/>
 	<classpathentry kind="lib" path="/Users/fuerst/Documents/APPC_WORKSPACE/Ti.GoogleSignIn/android/lib/google-play-services-basement-10.2.0.jar"/>
-	<classpathentry kind="lib" path="/Users/fuerst/Library/android-sdk-macosx/extras/android/support/v4/android-support-v4.jar"/>
-	<classpathentry kind="lib" path="/Users/fuerst/Documents/APPC_WORKSPACE/Ti.GoogleSignIn/android/lib/google-play-services-drive-10.2.0.jar"/>
-	<classpathentry kind="lib" path="/Users/fuerst/Documents/APPC_WORKSPACE/Ti.GoogleSignIn/android/lib/google-play-service-auth-10.2.0.jar"/>
 	<classpathentry kind="lib" path="/Users/fuerst/Documents/APPC_WORKSPACE/Ti.GoogleSignIn/android/lib/google-play-services-auth-base-10.2.0.jar"/>
-	<classpathentry kind="lib" path="/Users/fuerst/Documents/APPC_WORKSPACE/Ti.GoogleSignIn/android/lib/google-play-services-tasks-10.2.0.jar"/>
+	<classpathentry kind="lib" path="/Users/fuerst/Documents/APPC_WORKSPACE/Ti.GoogleSignIn/android/lib/google-play-service-auth-10.2.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
