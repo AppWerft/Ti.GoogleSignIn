@@ -139,8 +139,6 @@ public class GooglesigninModule extends KrollModule implements
 						Log.d(LCAT, "oResult SignOut");
 						KrollDict kd = new KrollDict();
 						kd.put("status", status.getStatusCode());
-						kd.put("status1", status.toString());
-
 						if (hasListeners("onsignout")) {
 							Log.e(LCAT,
 									"The 'onsignout' event is deprecated, use 'disconnect' instead.");
@@ -191,7 +189,7 @@ public class GooglesigninModule extends KrollModule implements
 						fireEvent("login", kd);
 					}
 				} else {
-					kd.put("status", result.getStatus());
+					kd.put("status", result.getStatus().getStatusCode());
 					kd.put("success", false);
 					if (hasListeners("onerror")) {
 						Log.e(LCAT,
