@@ -8,9 +8,6 @@
  */
 package ti.googlesignin;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
@@ -18,7 +15,6 @@ import org.appcelerator.kroll.common.Log;
 import org.appcelerator.kroll.common.TiConfig;
 import org.appcelerator.kroll.common.TiMessenger;
 import org.appcelerator.titanium.TiApplication;
-import org.appcelerator.titanium.io.TiFileFactory;
 import org.appcelerator.titanium.util.TiActivityResultHandler;
 import org.appcelerator.titanium.util.TiActivitySupport;
 
@@ -32,11 +28,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 
 @Kroll.module(name = "Googlesignin", id = "ti.googlesignin")
 public class GooglesigninModule extends KrollModule implements
@@ -48,7 +44,6 @@ public class GooglesigninModule extends KrollModule implements
 	private static int RC_SIGN_IN = 34;
 	private Context ctx;
 	private String packageName;
-	private String clientKeyfromGoogleServicesJSON = "";
 	private String serverClientId;
 
 	// You can define constants with @Kroll.constant, for example:
@@ -218,6 +213,13 @@ public class GooglesigninModule extends KrollModule implements
 	@Override
 	public void onConnectionFailed(ConnectionResult result) {
 		Log.e(LCAT, "onConnectionFailed");
+		if (hasListeners("error")) {
+			KrollDict kd = new KrollDict();
+			kd.put("error", result.getErrorMessage());
+			kd.put("code", result.getErrorCode());
+			fireEvent("error", kd);
+		}
+
 	}
 
 	/*
@@ -233,6 +235,7 @@ public class GooglesigninModule extends KrollModule implements
 	 */
 	@Override
 	public void onConnected(Bundle bundle) {
+		KrollDict kd = new KrollDict();
 		Log.d(LCAT, "onConnected");
 	}
 
@@ -248,23 +251,17 @@ public class GooglesigninModule extends KrollModule implements
 
 	@Override
 	public void onConnectionSuspended(int result) {
+		KrollDict kd = new KrollDict();
 		Log.d(LCAT, "onConnectionSuspended");
 	}
 
-	private String loadJSONFromAsset(String jsonfile) {
-		String jsonString = null;
-		try {
-			InputStream inStream = TiFileFactory.createTitaniumFile(
-					new String[] { resolveUrl(null, jsonfile) }, false)
-					.getInputStream();
-			byte[] buffer = new byte[inStream.available()];
-			inStream.read(buffer);
-			inStream.close();
-			jsonString = new String(buffer, "UTF-8");
-		} catch (IOException ex) {
-			ex.printStackTrace();
-			return null;
-		}
-		return jsonString;
-	}
+	/*
+	 * private String loadJSONFromAsset(String jsonfile) { String jsonString =
+	 * null; try { InputStream inStream = TiFileFactory.createTitaniumFile( new
+	 * String[] { resolveUrl(null, jsonfile) }, false) .getInputStream(); byte[]
+	 * buffer = new byte[inStream.available()]; inStream.read(buffer);
+	 * inStream.close(); jsonString = new String(buffer, "UTF-8"); } catch
+	 * (IOException ex) { ex.printStackTrace(); return null; } return
+	 * jsonString; }
+	 */
 }
