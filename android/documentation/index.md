@@ -17,11 +17,13 @@ Edit the modules section of your `tiapp.xml` file to include this module:
 
 ## Usage
 
-Initialize the module by setting the Google SignIn API key you can get from the Google API Console.
+Initialize the module by setting the Google SignIn API key you can get from the Google API Console.   
+Note that you will need to use the Web ClientID from Google instead of a Android one.   
+
 ```js
 var Google = require('ti.googlesignin');
 Google.initialize({
-    clientID: '<client-id>'
+    clientID: '<client-id>' //  Web application client ID, not androidID !!!!
 });
 ```
 
