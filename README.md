@@ -13,7 +13,6 @@ The iOS version with API-parity is available at [@hansemannn/Ti.GoogleSignIn](ht
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-
 <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 ```
 
@@ -31,7 +30,7 @@ Initialize the module by setting the Google SignIn API key you can get from the 
 ```js
 var Google = require('ti.googlesignin');
 Google.initialize({
-    clientID: '<client-id>',
+    clientID: '<client-id>', //  Web application client ID, not androidID !!!!
     onLogin : function(res) {
         console.log(result);
     }
