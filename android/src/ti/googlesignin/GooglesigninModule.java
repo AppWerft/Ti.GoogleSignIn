@@ -19,6 +19,7 @@ import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.titanium.util.TiActivityResultHandler;
 import org.appcelerator.titanium.util.TiActivitySupport;
 
+import android.accounts.Account;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -127,11 +128,9 @@ public class GooglesigninModule extends KrollModule implements
 		// Building of intent
 		final Intent signInIntent = Auth.GoogleSignInApi
 				.getSignInIntent(googleApiClient);
-		Log.d(LCAT, "signInIntent built");
 		// building new activity with result handler
 		final TiActivitySupport activitySupport = (TiActivitySupport) TiApplication
 				.getInstance().getCurrentActivity();
-		Log.d(LCAT, "TiActivitySupport built");
 		if (TiApplication.isUIThread()) {
 			activitySupport.launchActivityForResult(signInIntent, RC_SIGN_IN,
 					new SignInResultHandler());
@@ -198,7 +197,7 @@ public class GooglesigninModule extends KrollModule implements
 					kd.put("givenName", acct.getGivenName());
 					kd.put("accountName", acct.getAccount().name);
 					kd.put("token", acct.getIdToken());
-
+					kd.put("id", acct.getId());
 					if (hasListeners("onsuccess")) {
 						Log.e(LCAT,
 								"The 'onsuccess' event is deprecated, use 'login' instead.");
