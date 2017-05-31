@@ -13,7 +13,6 @@ The iOS version with API-parity is available at [@hansemannn/Ti.GoogleSignIn](ht
 ```xml
 <uses-permission android:name="android.permission.INTERNET" />
 <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-
 <uses-permission android:name="android.permission.USE_CREDENTIALS" />
 ```
 
@@ -27,11 +26,13 @@ Edit the modules section of your `tiapp.xml` file to include this module:
 ```
 
 ## Example
-Initialize the module by setting the Google SignIn API key you can get from the Google API Console.
+Initialize the module by setting the Google SignIn API key you can get from the Google API Console.   
+Note that you will need to use the Web ClientID from Google instead of a Android one.   
+
 ```js
 var Google = require('ti.googlesignin');
 Google.initialize({
-    clientID: '<client-id>',
+    clientID: '<client-id>', //  Web application client ID, not androidID !!!!
     onLogin : function(res) {
         console.log(result);
     }
@@ -58,7 +59,7 @@ Google.addEventListener('login', function(e) {
 Google.signIn();
 ```
 
-## Obtaining a SSH with Titanium
+## Obtaining a SHA-1 with Titanium
 In order to use Google Sign In in your app you will need to provide an SHA-1 certificate fingerprint for Google Console.
 You will need to provide a debug and a distribution SHA-1 fingerprint for your app. On Titanium, the debug SHA-1
 has to be generated from the `dev_keystore` file from your Titanium SDK android folder located at "mobilesdk/<platform>/<sdk_version>/android/dev_keystore".

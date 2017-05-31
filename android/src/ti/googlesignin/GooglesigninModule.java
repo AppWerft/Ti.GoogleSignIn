@@ -119,6 +119,7 @@ public class GooglesigninModule extends KrollModule implements
 				.addApi(Auth.GOOGLE_SIGN_IN_API, gso)
 				.addConnectionCallbacks(this)
 				.addOnConnectionFailedListener(this).build();
+		googleApiClient.connect();
 		Log.d(LCAT, "googleApiClient built, finished initialized");
 	}
 
@@ -147,28 +148,33 @@ public class GooglesigninModule extends KrollModule implements
 
 	@Kroll.method
 	protected synchronized void signOut() {
-		if (googleApiClient == null)
-			return;
-		Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
-				new ResultCallback<Status>() {
-					@Override
-					public void onResult(Status status) {
-						Log.d(LCAT, "oResult SignOut");
-						KrollDict kd = new KrollDict();
-						kd.put("status", status.getStatusMessage());
+		if (googleApiClient != null) {
+ 		   if(googleApiClient.isConnected()){
+			   Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
+	   				new ResultCallback<Status>() {
+	   					@Override
+	   					public void onResult(Status status) {
+	   						Log.d(LCAT, "oResult SignOut");
+	   						KrollDict kd = new KrollDict();
+	   						kd.put("status", status.getStatusMessage());
 
-						if (hasListeners("onsignout")) {
-							Log.e(LCAT,
-									"The 'onsignout' event is deprecated, use 'disconnect' instead.");
-							fireEvent("onsignout", kd);
-						}
+	   						if (hasListeners("onsignout")) {
+	   							Log.e(LCAT,
+	   									"The 'onsignout' event is deprecated, use 'disconnect' instead.");
+	   							fireEvent("onsignout", kd);
+	   						}
 
-						if (hasListeners("disconnect")) {
-							fireEvent("disconnect", kd);
-						}
-					}
-				});
-
+	   						if (hasListeners("disconnect")) {
+	   							fireEvent("disconnect", kd);
+	   						}
+	   					}
+	   				});
+		    }else{
+				Log.d(LCAT, "googleApiClient not connected yet");
+			}
+	   	}else{
+			Log.d(LCAT, "googleApiClient doesnt exist");
+	   	}
 	}
 
 	private final class SignInResultHandler implements TiActivityResultHandler {

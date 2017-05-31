@@ -1,6 +1,6 @@
 var Google = require('ti.googlesignin');
 Google.initialize({
-    clientID: "123456789123-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.apps.googleusercontent.com"
+    clientID: "123456789123-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa.apps.googleusercontent.com" //  Web application client ID, not androidID !!!!
 });
 
 var win = Ti.UI.createWindow({
