@@ -149,32 +149,32 @@ public class GooglesigninModule extends KrollModule implements
 	@Kroll.method
 	protected synchronized void signOut() {
 		if (googleApiClient != null) {
- 		   if(googleApiClient.isConnected()){
-			   Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(
-	   				new ResultCallback<Status>() {
-	   					@Override
-	   					public void onResult(Status status) {
-	   						Log.d(LCAT, "oResult SignOut");
-	   						KrollDict kd = new KrollDict();
-	   						kd.put("status", status.getStatusMessage());
+			if (googleApiClient.isConnected()) {
+				Auth.GoogleSignInApi.signOut(googleApiClient)
+						.setResultCallback(new ResultCallback<Status>() {
+							@Override
+							public void onResult(Status status) {
+								Log.d(LCAT, "oResult SignOut");
+								KrollDict kd = new KrollDict();
+								kd.put("status", status.getStatusMessage());
 
-	   						if (hasListeners("onsignout")) {
-	   							Log.e(LCAT,
-	   									"The 'onsignout' event is deprecated, use 'disconnect' instead.");
-	   							fireEvent("onsignout", kd);
-	   						}
+								if (hasListeners("onsignout")) {
+									Log.e(LCAT,
+											"The 'onsignout' event is deprecated, use 'disconnect' instead.");
+									fireEvent("onsignout", kd);
+								}
 
-	   						if (hasListeners("disconnect")) {
-	   							fireEvent("disconnect", kd);
-	   						}
-	   					}
-	   				});
-		    }else{
+								if (hasListeners("disconnect")) {
+									fireEvent("disconnect", kd);
+								}
+							}
+						});
+			} else {
 				Log.d(LCAT, "googleApiClient not connected yet");
 			}
-	   	}else{
+		} else {
 			Log.d(LCAT, "googleApiClient doesnt exist");
-	   	}
+		}
 	}
 
 	private final class SignInResultHandler implements TiActivityResultHandler {
@@ -191,19 +191,27 @@ public class GooglesigninModule extends KrollModule implements
 				KrollDict kd = new KrollDict();
 				if (result.isSuccess()) {
 					Log.d(LCAT, "Success");
-					GoogleSignInAccount acct = result.getSignInAccount();
-					Log.d(LCAT, acct.getDisplayName());
+					GoogleSignInAccount googleSignInAccount = result
+							.getSignInAccount();
+					Log.d(LCAT, googleSignInAccount.getDisplayName());
 					Log.d(LCAT, "Login Success");
 
-					kd.put("fullName", acct.getDisplayName());
-					kd.put("email", acct.getEmail());
-					kd.put("photo", acct.getPhotoUrl().toString());
-					kd.put("displayName", acct.getDisplayName());
-					kd.put("familyName", acct.getFamilyName());
-					kd.put("givenName", acct.getGivenName());
-					kd.put("accountName", acct.getAccount().name);
-					kd.put("token", acct.getIdToken());
-					kd.put("id", acct.getId());
+					kd.put("fullName", googleSignInAccount.getDisplayName());
+					kd.put("displayName", googleSignInAccount.getDisplayName());
+					kd.put("email", googleSignInAccount.getEmail());
+					kd.put("photo", googleSignInAccount.getPhotoUrl()
+							.toString());
+					kd.put("photoUrl", googleSignInAccount.getPhotoUrl()
+							.toString());
+					kd.put("familyName", googleSignInAccount.getFamilyName());
+					kd.put("givenName", googleSignInAccount.getGivenName());
+					kd.put("accountName", googleSignInAccount.getAccount().name);
+					kd.put("accountType", googleSignInAccount.getAccount().type);
+					kd.put("accountString", googleSignInAccount.getAccount()
+							.toString());
+					kd.put("token", googleSignInAccount.getIdToken());
+					kd.put("idToken", googleSignInAccount.getIdToken());
+					kd.put("id", googleSignInAccount.getId());
 					if (hasListeners("onsuccess")) {
 						Log.e(LCAT,
 								"The 'onsuccess' event is deprecated, use 'login' instead.");
