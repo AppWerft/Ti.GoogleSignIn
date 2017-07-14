@@ -28,8 +28,7 @@ Edit the modules section of your `tiapp.xml` file to include this module:
 `#### PLEASE NOTE!`
 **You will need to use the Web ClientID from Google instead of a Android one.**
 
-```
-
+   
 ## Obtaining a SHA-1 with Titanium
 In order to use Google Sign In in your app you will need to provide an SHA-1 certificate fingerprint for Google Console.
 You will need to provide a debug and a distribution SHA-1 fingerprint for your app. On Titanium, the debug SHA-1
