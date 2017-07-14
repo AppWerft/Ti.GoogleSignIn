@@ -27,6 +27,24 @@ Edit the modules section of your `tiapp.xml` file to include this module:
 
 `#### PLEASE NOTE!`
 **You will need to use the Web ClientID from Google instead of a Android one.**
+
+```
+
+## Obtaining a SHA-1 with Titanium
+In order to use Google Sign In in your app you will need to provide an SHA-1 certificate fingerprint for Google Console.
+You will need to provide a debug and a distribution SHA-1 fingerprint for your app. On Titanium, the debug SHA-1
+has to be generated from the `dev_keystore` file from your Titanium SDK android folder located at "mobilesdk/<platform>/<sdk_version>/android/dev_keystore".
+On macOS for example it would rely on: "~/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/dev_keystore".   
+And an command line example for it would be:   
+```
+keytool -list -v -keystore ~/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/dev_keystore
+```   
+
+You can follow same instructions used to configure a map in your Android app from [Appcelerator Docs](http://docs.appcelerator.com/platform/latest/#!/guide/Google_Maps_v2_for_Android-section-src-36739898_GoogleMapsv2forAndroid-ObtainandAddaGoogleAPIKey).   
+
+This repo also includes a video on how to create an Android app on Firebase and Google Developers Console to better explain the process.   
+As Appcelerator's documentation recommends, when submitting your app to Google Play Store you would need to create a production .keystore file, so don't forget to create another SHA-1 for this key and remember to add it also as another "fingerprint" on Firebase.
+
 ## Example
 Initialize the module by setting the Google SignIn API key you can get from the Google API Console.   
 Note that you will need to use the Web ClientID from Google instead of a Android one.   
@@ -59,20 +77,6 @@ Google.addEventListener('login', function(e) {
     */
 });
 Google.signIn();
-```
-
-## Obtaining a SHA-1 with Titanium
-In order to use Google Sign In in your app you will need to provide an SHA-1 certificate fingerprint for Google Console.
-You will need to provide a debug and a distribution SHA-1 fingerprint for your app. On Titanium, the debug SHA-1
-has to be generated from the `dev_keystore` file from your Titanium SDK android folder located at "mobilesdk/<platform>/<sdk_version>/android/dev_keystore".
-On macOS for example it would rely on: "~/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/dev_keystore".   
-And an command line example for it would be:   
-```
-keytool -list -v -keystore ~/Library/Application\ Support/Titanium/mobilesdk/osx/6.0.2.GA/android/dev_keystore
-```   
-
-You can follow same instructions used to configure a map in your Android app from [Appcelerator Docs](http://docs.appcelerator.com/platform/latest/#!/guide/Google_Maps_v2_for_Android-section-src-36739898_GoogleMapsv2forAndroid-ObtainandAddaGoogleAPIKey).
-
 ## Methods
 - [x] `signIn`
 - [x] `signOut`
