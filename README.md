@@ -42,7 +42,7 @@ keytool -list -v -keystore ~/Library/Application\ Support/Titanium/mobilesdk/osx
 
 You can follow same instructions used to configure a map in your Android app from [Appcelerator Docs](http://docs.appcelerator.com/platform/latest/#!/guide/Google_Maps_v2_for_Android-section-src-36739898_GoogleMapsv2forAndroid-ObtainandAddaGoogleAPIKey).   
 
-This repo also includes a video on how to create an Android app on Firebase and Google Developers Console to better explain the process.   
+This repo also [includes a video](https://github.com/AppWerft/Ti.GoogleSignIn/blob/master/example/How%20to%20create%20Android%20keys.mov) on how to create an Android app on Firebase and Google Developers Console to better explain the process.   
 As Appcelerator's documentation recommends, when submitting your app to Google Play Store you would need to create a production .keystore file, so don't forget to create another SHA-1 for this key and remember to add it also as another "fingerprint" on Firebase.
 
 ## Example
