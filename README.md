@@ -76,6 +76,8 @@ Google.addEventListener('login', function(e) {
     */
 });
 Google.signIn();
+```
+
 ## Methods
 - [x] `signIn`
 - [x] `signOut`
