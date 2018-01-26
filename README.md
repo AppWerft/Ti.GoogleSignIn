@@ -18,12 +18,15 @@ The iOS version with API-parity is available at [@hansemannn/Ti.GoogleSignIn](ht
 
 ## Setup
 Unpack the module and place it inside the `modules/android/` folder of your project.
-Edit the modules section of your `tiapp.xml` file to include this module:
+Edit the `modules` tag of your `tiapp.xml` file & add these below two lines (add `ti.playservices` if not already added):
 ```xml
 <modules>
     <module platform="android">ti.googlesignin</module>
+    <module platform="android">ti.playservices</module>
 </modules>
 ```
+
+##### If you are using other Ti modules like ti.cloudpush, ti.map, or firebase.core, then ***ti.playservices*** will support them all to avoid duplicate JAR conflicts errors.
 
 `#### PLEASE NOTE!`
 **You will need to use the Web ClientID from Google instead of a Android one.**
