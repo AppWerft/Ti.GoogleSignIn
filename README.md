@@ -75,6 +75,8 @@ Google.addEventListener('login', function(e) {
        "email": "user@domain.com",
        "displayName": "User Name",
        "photo": "https://lh5.googleusercontent.com/-F58Ul6-zinE/AAAAAAAAAAI/AAAAAAAAAAAA/123456789/abc-d/photo.jpg",
+       // to get large-sized photos, append this '?sz=500' in 'photo' value to get 500x500 picture like this:
+       // "https://lh5.googleusercontent.com/-F58Ul6-zinE/AAAAAAAAAAI/AAAAAAAAAAAA/123456789/abc-d/photo.jpg?sz=350"
     }
     */
 });
