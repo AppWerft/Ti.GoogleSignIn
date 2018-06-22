@@ -30,6 +30,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.auth.api.signin.GoogleSignInStatusCodes;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
@@ -120,7 +121,7 @@ public class GooglesigninModule extends KrollModule implements
 				.addConnectionCallbacks(this)
 				.addOnConnectionFailedListener(this).build();
 		googleApiClient.connect();
-		Log.d(LCAT, "googleApiClient built, finished initialized");
+		Log.d(LCAT, "googleApiClient built, finished initialize");
 	}
 
 	@Kroll.method
@@ -184,10 +185,13 @@ public class GooglesigninModule extends KrollModule implements
 
 		public void onResult(Activity dummy, int requestCode, int resultCode,
 				Intent data) {
-			Log.d(LCAT, "onResult");
+			Log.d(LCAT, "onResult: " + requestCode);
 			if (requestCode == RC_SIGN_IN) {
+                                Log.d(LCAT, "processing sign-in with resultCode: " + resultCode);
 				GoogleSignInResult result = Auth.GoogleSignInApi
 						.getSignInResultFromIntent(data);
+				Status status = result.getStatus();
+				Log.d(LCAT, "Status = " + status);
 				KrollDict kd = new KrollDict();
 				if (result.isSuccess()) {
 					Log.d(LCAT, "Success");
@@ -223,6 +227,7 @@ public class GooglesigninModule extends KrollModule implements
 					if (onLogin != null)
 						onLogin.call(getKrollObject(), kd);
 				} else {
+                                        Log.d(LCAT, "was not a success: " + requestCode);
 					kd.put("status", result.getStatus().getStatusCode());
 					kd.put("message", result.getStatus().getStatusMessage());
 
@@ -266,13 +271,16 @@ public class GooglesigninModule extends KrollModule implements
 	@Override
 	public void onConnected(Bundle bundle) {
 		Log.d(LCAT, "onConnected");
-		if (bundle != null) {
-			KrollDict kd = new KrollDict();
-			kd.put("result", bundle.toString());
-			if (hasListeners("connect"))
-				fireEvent("connect", kd);
 
+		KrollDict kd = new KrollDict();
+		if (bundle != null) {
+	                Log.d(LCAT, "connected, non-null bundle");
+			kd.put("result", bundle.toString());
+		} else {
+			Log.w(LCAT, "onConnected, but bundle is NULL - an empty connect event will be sent");
 		}
+                if (hasListeners("connect"))
+                        fireEvent("connect", kd);
 	}
 
 	/*
@@ -301,3 +309,4 @@ public class GooglesigninModule extends KrollModule implements
 	 * jsonString; }
 	 */
 }
+
