@@ -48,7 +48,7 @@ This repo also [includes a video](https://github.com/AppWerft/Ti.GoogleSignIn/bl
 As Appcelerator's documentation recommends, when submitting your app to Google Play Store you will need to create a production .keystore file, so don't forget to create another SHA-1 for this key and remember to add it also as another "fingerprint" on Firebase.
 Note that some users have reported problems when submitting new apps to the Play Store, where the Google Login stop working on production. A solution found was to get another SHA-1 fingerprint from the Google Play app's dashboard and add this fingerprint to Firebase.
 These fingerprints could be found on your Google Play Console, under the "Release Management" menu on the left and then on "App signing".
-Here is an example on how it looks like:
+Here is an example on how it looks like:   
 <img src="example/play_store_sha1.png" width="483" alt="Google Play Console" />   
 
 ## Example
