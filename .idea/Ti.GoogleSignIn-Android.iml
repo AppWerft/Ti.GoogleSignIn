@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="android" name="Android">
+      <configuration>
+        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/../android/build/intermediates/manifests/aapt/AndroidManifest.xml" />
+        <option name="RES_FOLDER_RELATIVE_PATH" value="/../android/platform/android/res" />
+        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/../android/assets" />
+        <option name="LIBS_FOLDER_RELATIVE_PATH" value="/../android/libs" />
+        <option name="ENABLE_SOURCES_AUTOGENERATION" value="false" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/android/src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="kroll-common" level="project" />
+    <orderEntry type="library" name="kroll-apt" level="project" />
+    <orderEntry type="library" name="titanium" level="project" />
+    <orderEntry type="library" name="play-services-auth-11.0.4" level="project" />
+    <orderEntry type="library" name="play-services-auth-base-11.0.4" level="project" />
+    <orderEntry type="library" name="play-services-base-11.0.4" level="project" />
+    <orderEntry type="library" name="play-services-basement-11.0.4" level="project" />
+  </component>
+</module>
