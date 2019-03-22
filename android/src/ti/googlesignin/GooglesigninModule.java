@@ -16,7 +16,6 @@ import org.appcelerator.kroll.common.TiMessenger;
 import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.titanium.util.TiActivityResultHandler;
 import org.appcelerator.titanium.util.TiActivitySupport;
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -132,9 +131,7 @@ public class GooglesigninModule extends KrollModule implements ConnectionCallbac
 								KrollDict kd = new KrollDict();
 								kd.put("status", status.getStatusMessage());
 
-								if (hasListeners("disconnect")) {
-									fireEvent("disconnect", kd);
-								}
+								fireEvent("disconnect", kd);
 							}
 						});
 			} else {
@@ -179,7 +176,7 @@ public class GooglesigninModule extends KrollModule implements ConnectionCallbac
                     auth.put("idToken", googleSignInAccount.getIdToken());
 
                     user.put("id", googleSignInAccount.getId());
-                    user.put("scopes", googleSignInAccount.getGrantedScopes());
+                    user.put("scopes", googleSignInAccount.getGrantedScopes().toArray());
                     user.put("serverAuthCode", googleSignInAccount.getServerAuthCode());
 					user.put("profile", profile);
                     user.put("authentication", auth);
@@ -187,19 +184,13 @@ public class GooglesigninModule extends KrollModule implements ConnectionCallbac
 					event.put("user", user);
 					event.put("success", true);
 
-					Log.d(LCAT, new JSONObject(event).toString());
-
-					if (hasListeners("login")) {
-						fireEvent("login", event);
-					}
+					fireEvent("login", event);
 				} else {
 					event.put("code", result.getStatus().getStatusCode());
 					event.put("message", result.getStatus().getStatusMessage());
 					event.put("success", false);
 
-					if (hasListeners("error")) {
-						fireEvent("error", event);
-					}
+					fireEvent("error", event);
 				}
 			}
 		}
@@ -207,11 +198,12 @@ public class GooglesigninModule extends KrollModule implements ConnectionCallbac
 
 	@Override
 	public void onConnectionFailed(ConnectionResult result) {
-		Log.e(LCAT, "onConnectionFailed");
+		Log.d(LCAT, "onConnectionFailed");
 		if (hasListeners("error")) {
 			KrollDict kd = new KrollDict();
 			kd.put("error", result.getErrorMessage());
 			kd.put("code", result.getErrorCode());
+
 			fireEvent("error", kd);
 		}
 	}
@@ -238,9 +230,7 @@ public class GooglesigninModule extends KrollModule implements ConnectionCallbac
 			kd.put("result", bundle.toString());
 		}
 
-		if (hasListeners("connect")) {
-		    fireEvent("connect", kd);
-        }
+	    fireEvent("connect", kd);
 	}
 
 	/*
