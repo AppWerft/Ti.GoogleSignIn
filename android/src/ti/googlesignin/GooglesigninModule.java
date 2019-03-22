@@ -31,8 +31,12 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
 import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
+import com.google.android.gms.common.api.OptionalPendingResult;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.common.api.Status;
+
+import java.util.ArrayList;
 
 @Kroll.module(name = "Googlesignin", id = "ti.googlesignin")
 public class GooglesigninModule extends KrollModule implements ConnectionCallbacks, OnConnectionFailedListener {
@@ -40,6 +44,7 @@ public class GooglesigninModule extends KrollModule implements ConnectionCallbac
 
 	public static final String LCAT = "TiGoogleSignIn";
 	private static int RC_SIGN_IN = 34;
+	private boolean loggedIn = false;
 
 	@Kroll.constant
     @SuppressWarnings("unused")
@@ -63,10 +68,34 @@ public class GooglesigninModule extends KrollModule implements ConnectionCallbac
 
 	@Override
 	public void onStart(Activity activity) {
-		Log.d(LCAT, "[MODULE LIFECYCLE EVENT] start");
-		if (googleApiClient != null)
-			googleApiClient.connect();
 		super.onStart(activity);
+
+		if (googleApiClient != null) {
+			googleApiClient.connect();
+		}
+
+		OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
+
+		if (opr.isDone()) {
+			// If the user's cached credentials are valid, the OptionalPendingResult will be "done"
+			// and the GoogleSignInResult will be available instantly.
+			Log.d(LCAT, "Got cached sign-in");
+			GoogleSignInResult result = opr.get();
+			loggedIn = result.getStatus().isSuccess();
+		} else {
+			Log.d(LCAT, "No cached sign-in");
+
+			// If the user has not previously signed in on this device or the sign-in has expired,
+			// this asynchronous branch will attempt to sign in the user silently.  Cross-device
+			// single sign-on will occur in this branch.
+			opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+				@Override
+				public void onResult(GoogleSignInResult googleSignInResult) {
+					Log.d(LCAT, "Silent sign-in done");
+					loggedIn = googleSignInResult.getStatus().isSuccess();
+				}
+			});
+		}
 	}
 
 	@Kroll.method
@@ -94,7 +123,7 @@ public class GooglesigninModule extends KrollModule implements ConnectionCallbac
 
 	@Kroll.getProperty
 	protected boolean getLoggedIn() {
-		return googleApiClient.isConnected();
+		return loggedIn;
 	}
 
 	@Kroll.method
@@ -132,6 +161,7 @@ public class GooglesigninModule extends KrollModule implements ConnectionCallbac
 								kd.put("status", status.getStatusMessage());
 
 								fireEvent("disconnect", kd);
+								loggedIn = false;
 							}
 						});
 			} else {
@@ -163,6 +193,13 @@ public class GooglesigninModule extends KrollModule implements ConnectionCallbac
 
                     GoogleSignInAccount googleSignInAccount = result.getSignInAccount();
 
+					ArrayList<String> scopes = new ArrayList<String>();
+					loggedIn = true;
+
+					for (Scope scope : googleSignInAccount.getGrantedScopes()) {
+						scopes.add(scope.toString());
+					}
+
 					profile.put("familyName", googleSignInAccount.getFamilyName());
                     profile.put("givenName", googleSignInAccount.getGivenName());
                     profile.put("accountName", googleSignInAccount.getAccount().name);
@@ -176,7 +213,7 @@ public class GooglesigninModule extends KrollModule implements ConnectionCallbac
                     auth.put("idToken", googleSignInAccount.getIdToken());
 
                     user.put("id", googleSignInAccount.getId());
-                    user.put("scopes", googleSignInAccount.getGrantedScopes().toArray());
+                    user.put("scopes", scopes.toArray(new String[scopes.size()]));
                     user.put("serverAuthCode", googleSignInAccount.getServerAuthCode());
 					user.put("profile", profile);
                     user.put("authentication", auth);
@@ -189,6 +226,7 @@ public class GooglesigninModule extends KrollModule implements ConnectionCallbac
 					event.put("code", result.getStatus().getStatusCode());
 					event.put("message", result.getStatus().getStatusMessage());
 					event.put("success", false);
+					loggedIn = false;
 
 					fireEvent("error", event);
 				}
