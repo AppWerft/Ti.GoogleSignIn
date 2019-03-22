@@ -12,11 +12,11 @@ import org.appcelerator.kroll.KrollDict;
 import org.appcelerator.kroll.KrollModule;
 import org.appcelerator.kroll.annotations.Kroll;
 import org.appcelerator.kroll.common.Log;
-import org.appcelerator.kroll.common.TiConfig;
 import org.appcelerator.kroll.common.TiMessenger;
 import org.appcelerator.titanium.TiApplication;
 import org.appcelerator.titanium.util.TiActivityResultHandler;
 import org.appcelerator.titanium.util.TiActivitySupport;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -36,12 +36,10 @@ import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
 @Kroll.module(name = "Googlesignin", id = "ti.googlesignin")
-public class GooglesigninModule extends KrollModule implements
-        ConnectionCallbacks, OnConnectionFailedListener {
+public class GooglesigninModule extends KrollModule implements ConnectionCallbacks, OnConnectionFailedListener {
 	GoogleApiClient googleApiClient;
 
 	public static final String LCAT = "TiGoogleSignIn";
-	private static final boolean DBG = TiConfig.LOGD;
 	private static int RC_SIGN_IN = 34;
 
 	@Kroll.constant
@@ -93,6 +91,11 @@ public class GooglesigninModule extends KrollModule implements
 				.addConnectionCallbacks(this)
 				.addOnConnectionFailedListener(this).build();
 		googleApiClient.connect();
+	}
+
+	@Kroll.getProperty
+	protected boolean getLoggedIn() {
+		return googleApiClient.isConnected();
 	}
 
 	@Kroll.method
@@ -178,11 +181,13 @@ public class GooglesigninModule extends KrollModule implements
                     user.put("id", googleSignInAccount.getId());
                     user.put("scopes", googleSignInAccount.getGrantedScopes());
                     user.put("serverAuthCode", googleSignInAccount.getServerAuthCode());
-                    user.put("id", googleSignInAccount.getId());
 					user.put("profile", profile);
                     user.put("authentication", auth);
 
 					event.put("user", user);
+					event.put("success", true);
+
+					Log.d(LCAT, new JSONObject(event).toString());
 
 					if (hasListeners("login")) {
 						fireEvent("login", event);
@@ -209,7 +214,6 @@ public class GooglesigninModule extends KrollModule implements
 			kd.put("code", result.getErrorCode());
 			fireEvent("error", kd);
 		}
-
 	}
 
 	/*
@@ -229,11 +233,9 @@ public class GooglesigninModule extends KrollModule implements
 
 		KrollDict kd = new KrollDict();
 
+		// This may be set if play-services provide it. If not available, it's fine as well
 		if (bundle != null) {
-		    Log.d(LCAT, "connected, non-null bundle");
 			kd.put("result", bundle.toString());
-		} else {
-			Log.e(LCAT, "onConnected, but bundle is NULL - an empty connect event will be sent");
 		}
 
 		if (hasListeners("connect")) {
