@@ -219,10 +219,18 @@ public class GooglesigninModule extends KrollModule implements ConnectionCallbac
                     user.put("authentication", auth);
 
 					event.put("user", user);
+					event.put("cancelled", false);
 					event.put("success", true);
 
 					fireEvent("login", event);
 				} else {
+					if (result.getStatus().getStatusCode() == -5) {
+						event.put("cancelled", true);
+						event.put("success", false);
+
+						fireEvent("login", event);
+						return;
+					}
 					event.put("code", result.getStatus().getStatusCode());
 					event.put("message", result.getStatus().getStatusMessage());
 					event.put("success", false);
