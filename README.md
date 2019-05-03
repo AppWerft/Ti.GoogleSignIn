@@ -51,6 +51,10 @@ These fingerprints could be found on your Google Play Console, under the "Releas
 Here is an example on how it looks like:   
 <img src="example/play_store_sha1.png" width="483" alt="Google Play Console" />   
 
+#### Hint:
+
+If you receive an error `12500` you might need to set the `support email` in your project on firebase (settings - general - support email)
+
 ## Example
 Initialize the module by setting the Google SignIn API key you can get from the Google API Console.   
 Note that you will need to use the Web ClientID from Google instead of a Android one.   
