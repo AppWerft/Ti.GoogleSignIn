@@ -1,3 +1,0 @@
-"/Users/fuerst/Documents/APPC_WORKSPACE/Ti.GoogleSignIn/android/build/generated/java/ti/googlesignin/GooglesigninBootstrap.java"
-"/Users/fuerst/Documents/APPC_WORKSPACE/Ti.GoogleSignIn/android/src/ti/googlesignin/GoogleServices.java"
-"/Users/fuerst/Documents/APPC_WORKSPACE/Ti.GoogleSignIn/android/src/ti/googlesignin/GooglesigninModule.java"
